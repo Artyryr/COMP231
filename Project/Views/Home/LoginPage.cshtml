@@ -1,0 +1,43 @@
+﻿@model LoginModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+    ViewBag.Image = "url('/images/registration.jpg')";
+    ViewBag.Title = "User Login";
+    ViewBag.PageName = "User Login";
+}
+
+<div class="row d-flex">
+    <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
+        <form asp-action="LoginPage" asp-controller="Home" method="post" enctype="multipart/form-data">
+            <input type="hidden" asp-for="ReturnUrl" />
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Email">E-mail</label>
+                        <input asp-for="Email" type="text" class="form-control" placeholder="E-mail" data-val="true" data-val-required="The E-mail is required.">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Password">Password</label>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Password" data-val="true" data-val-required="The E-mail is required.">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="text-danger" asp-validation-summary="All"></div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary py-3 px-5 text-center">Log In</button>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <a class="py-3 px-5 text-center" asp-action="RegistrationPage">Do not have an account yet?</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

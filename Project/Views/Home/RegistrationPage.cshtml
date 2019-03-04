@@ -1,0 +1,63 @@
+﻿@model LoginModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+    ViewBag.Image = "url('/images/registration.jpg')";
+    ViewBag.Title = "User Registration";
+    ViewBag.PageName = "User Registration";
+}
+
+<div class="row d-flex">
+    <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
+        <form action="" method="post">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label asp-for="Email">E-mail</label>
+                        <input asp-for="Email" type="text" class="form-control" data-val="true" data-val-required="The E-mail is recuired.">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="User.FirstName">First Name</label>
+                        <input asp-for="User.FirstName " type="text" class="form-control" placeholder="First Name" data-val="true" data-val-required="The First Name is recuired.">
+                        <span asp-validation-for="User.FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="User.LastName">Last Name</label>
+                        <input asp-for="User.LastName" type="text" class="form-control" placeholder="Last Name" data-val="true" data-val-required="The Last Name is recuired.">
+                        <span asp-validation-for="User.LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input asp-for="Password" type="password" class="form-control" placeholder="Password" name="Password" data-val="true" data-val-required="The Password is recuired.">
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <input asp-for="ConfirmationPassword" type="password" class="form-control" placeholder="Confirm Password" data-val="true" data-val-required="The Confirmed Password Name is recuired.">
+                        <span asp-validation-for="ConfirmationPassword" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="text-danger" asp-validation-summary="All"></div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary py-3 px-5 text-center">Register</button>
+                    </div>
+                </div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <a asp-action="LoginPage" class="py-3 px-5 text-center">Already registered?</a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
