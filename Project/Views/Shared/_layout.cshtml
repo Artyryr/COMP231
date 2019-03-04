@@ -41,11 +41,6 @@
                         <li class="nav-item"><a asp-action="Index" asp-controller="Home" class="nav-link">Home</a></li>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item"><a asp-action="InsertPage" asp-controller="Recipe" class="nav-link">Insert Page</a></li>
-                            <li class="nav-item"><a asp-action="DataPage" asp-controller="Recipe" class="nav-link">Data Page</a></li>
-                        }
-                        @if (User.Identity.IsAuthenticated)
-                        {
                             <li class="nav-item"><a asp-action="Logout" asp-controller="Home" class="nav-link">Logout</a></li>
                         }
                         else
