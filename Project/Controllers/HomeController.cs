@@ -41,7 +41,21 @@ namespace Project.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> LoginPage(LoginModel userSearch)
         {
-            if (ModelState.IsValid)
+            if (userSearch.loggedInThroughFacebook == true)
+            {
+
+            }
+            else if (userSearch.loggedInThroughGoogle == true)
+            {
+                await signInManager.SignOutAsync();
+                if ((await signInManager.ExternalLoginSignInAsync(
+            "Google", userSearch.User.Id, false)).Succeeded)
+                {
+                    return RedirectToAction(userSearch?.ReturnUrl ?? "Index");
+                }
+
+            }
+            else if (ModelState.IsValid)
             {
                 GeneralUser user =
                     await userManager.FindByEmailAsync(userSearch.Email);

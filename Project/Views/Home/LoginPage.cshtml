@@ -32,6 +32,11 @@
                         <button type="submit" class="btn btn-primary py-3 px-5 text-center">Log In</button>
                     </div>
                 </div>
+                <div class="col-md-6 text-center">
+                    <div class="form-group text-center">
+                        <div class="g-signin2 text-center" data-onsuccess="onSignIn"></div>
+                    </div>
+                </div>
                 <div class="col-md-12 mt-3 text-center">
                     <div class="form-group">
                         <a class="py-3 px-5 text-center" asp-action="RegistrationPage">Do not have an account yet?</a>
@@ -41,3 +46,31 @@
         </form>
     </div>
 </div>
+
+<environment>
+    <script>
+    @*function onSignIn(googleUser) {
+        // Useful data for your client-side scripts:
+        var profile = googleUser.getBasicProfile();
+
+        @this.Model.Email = profile.getEmail();
+        @this.Model.User.Email = profile.getEmail();
+        @this.Model.User.FirstName = profile.getName();
+
+
+        @this.Model.User.LastName = profile.getFamilyName();
+        @this.Model.loggedInThroughGoogle = true;
+
+        //console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        //console.log('Full Name: ' + profile.getName());
+        //console.log('Given Name: ' + profile.getGivenName());
+        //console.log('Family Name: ' + profile.getFamilyName());
+        //console.log("Image URL: " + profile.getImageUrl());
+        //console.log("Email: " + profile.getEmail());
+
+        //// The ID token you need to pass to your backend:
+        //var id_token = googleUser.getAuthResponse().id_token;
+        //console.log("ID Token: " + id_token);
+    }*@
+    </script>
+</environment>

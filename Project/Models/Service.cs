@@ -14,6 +14,7 @@ namespace Project.Models
         public string ServiceName { get; set; }
         public int ServiceTypeId { get; set; }
         public double PricePerHour { get; set; }
+        public string Description { get; set; }
 
         public Service()
         {
@@ -24,6 +25,13 @@ namespace Project.Models
             ServiceName = serviceName;
             ServiceTypeId = serviceTypeId;
             PricePerHour = pricePerHour;
+        }
+        public Service(string serviceName, int serviceTypeId, double pricePerHour, string description)
+        {
+            ServiceName = serviceName;
+            ServiceTypeId = serviceTypeId;
+            PricePerHour = pricePerHour;
+            Description = description;
         }
     }
 }

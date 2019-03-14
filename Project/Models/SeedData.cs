@@ -27,7 +27,7 @@ namespace Project.Models
             if (!context.Services.Any())
             {
                 context.Services.AddRange(
-                    new Service("Leak Repair", 1,70.0),
+                    new Service("Leak Repair", 1, 70.0, "As soon as you detect a water leak in your home, it is critical to get it repaired as soon as possible to avoid damage to your belongings and expensive water bills. The most obvious household plumbing leaks include dripping faucets and leaking water heaters. Have a water leak in your basement?"),
                     new Service("Drain Cleaning", 1, 70),
                     new Service("Toilet Repair", 1, 70),
                     new Service("Garbage Disposal Repair", 1, 70),

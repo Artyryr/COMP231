@@ -29,5 +29,7 @@ namespace Project.Models
         public string ConfirmationPassword { get; set; }
 
         public GeneralUser User { get; set; }
+        public bool loggedInThroughGoogle { get; set; }
+        public bool loggedInThroughFacebook { get; set; }
     }
 }

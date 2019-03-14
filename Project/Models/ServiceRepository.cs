@@ -34,6 +34,7 @@ namespace Project.Models
                     dbEntry.ServiceName = service.ServiceName;
                     dbEntry.ServiceTypeId = service.ServiceTypeId;
                     dbEntry.PricePerHour = service.PricePerHour;
+                    dbEntry.Description = service.Description;
                 }
             }
             context.SaveChanges();
