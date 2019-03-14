@@ -29,6 +29,11 @@ namespace Project
                 .AddEntityFrameworkStores<IdentityDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddDbContext<ApplicationDbContext>(options =>
+               options.UseSqlServer(
+                   Configuration["Data:Services:ConnectionString"]));
+            services.AddTransient<IServiceRepository, ServiceRepository>();
+
             services.AddMvc();
         }
 

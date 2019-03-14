@@ -33,6 +33,8 @@ namespace Project.Models
                 test = new GeneralUser { Email = testUser, UserName = testUser, FirstName = "Test", LastName = "Last Test", };
                 await userManager.CreateAsync(test, testPassword);
             }
+
+            SeedData.EnsurePopulated(app);
         }
     }
 }

@@ -10,14 +10,14 @@ using Project.Models;
 namespace Project.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20190304174132_Initial")]
+    [Migration("20190314015337_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.4-rtm-31024")
+                .HasAnnotation("ProductVersion", "2.1.8-servicing-32085")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -186,6 +186,25 @@ namespace Project.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("Project.Models.Service", b =>
+                {
+                    b.Property<int>("ServiceId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("GeneralUserId");
+
+                    b.Property<string>("ServiceName");
+
+                    b.Property<int>("ServiceTypeId");
+
+                    b.HasKey("ServiceId");
+
+                    b.HasIndex("GeneralUserId");
+
+                    b.ToTable("Service");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -229,6 +248,13 @@ namespace Project.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Project.Models.Service", b =>
+                {
+                    b.HasOne("Project.Models.GeneralUser")
+                        .WithMany("UserServices")
+                        .HasForeignKey("GeneralUserId");
                 });
 #pragma warning restore 612, 618
         }
