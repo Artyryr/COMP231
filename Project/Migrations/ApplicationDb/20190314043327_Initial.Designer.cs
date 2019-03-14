@@ -10,7 +10,7 @@ using Project.Models;
 namespace Project.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190314015344_Initial")]
+    [Migration("20190314043327_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,13 +27,23 @@ namespace Project.Migrations.ApplicationDb
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Address");
+                    b.Property<string>("Apartment");
+
+                    b.Property<string>("City");
 
                     b.Property<DateTime>("Date");
 
+                    b.Property<double>("NumberOfHours");
+
+                    b.Property<string>("Province");
+
                     b.Property<int>("ServiceId");
 
+                    b.Property<string>("Street");
+
                     b.Property<int>("UserId");
+
+                    b.Property<string>("ZIP");
 
                     b.HasKey("RequestedServiceId");
 
@@ -45,6 +55,8 @@ namespace Project.Migrations.ApplicationDb
                     b.Property<int>("ServiceId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<double>("PricePerHour");
 
                     b.Property<string>("ServiceName");
 

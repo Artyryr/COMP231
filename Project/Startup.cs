@@ -50,6 +50,7 @@ namespace Project
                 routes.MapRoute(name: "default",
                                 template: "{controller=Home}/{action=Index}");
             });
+
             IdentitySeedData.EnsurePopulated(app);
         }
     }

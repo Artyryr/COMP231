@@ -8,6 +8,7 @@ namespace Project.Models
     public class ServiceRepository : IServiceRepository
     {
         private ApplicationDbContext context;
+        
         public ServiceRepository(ApplicationDbContext ctx)
         {
             context = ctx;
@@ -32,6 +33,7 @@ namespace Project.Models
                 {
                     dbEntry.ServiceName = service.ServiceName;
                     dbEntry.ServiceTypeId = service.ServiceTypeId;
+                    dbEntry.PricePerHour = service.PricePerHour;
                 }
             }
             context.SaveChanges();
@@ -45,7 +47,6 @@ namespace Project.Models
             }
             context.SaveChanges();
         }
-
 
         public void AddServiceType(ServiceType serviceType)
         {
@@ -88,10 +89,15 @@ namespace Project.Models
 
                 if (dbEntry != null)
                 {
-                    dbEntry.UserId = requestedService.UserId;
                     dbEntry.ServiceId = requestedService.ServiceId;
+                    dbEntry.UserId = requestedService.UserId;
                     dbEntry.Date = requestedService.Date;
-                    dbEntry.Address = requestedService.Address;
+                    dbEntry.Apartment = requestedService.Apartment;
+                    dbEntry.Street = requestedService.Street;
+                    dbEntry.City = requestedService.City;
+                    dbEntry.ZIP = requestedService.ZIP;
+                    dbEntry.Province = requestedService.Province;
+                    dbEntry.NumberOfHours = requestedService.NumberOfHours;
                 }
             }
             context.SaveChanges();

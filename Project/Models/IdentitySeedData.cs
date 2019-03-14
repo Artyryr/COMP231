@@ -19,10 +19,22 @@ namespace Project.Models
             UserManager<GeneralUser> userManager = app.ApplicationServices
                .GetRequiredService<UserManager<GeneralUser>>();
 
-            GeneralUser user = await userManager.FindByEmailAsync(artur);
+                //IdentityDbContext context = app.ApplicationServices
+                //    .GetRequiredService<IdentityDbContext>();
+
+                //if (!context.Users.Any())
+                //{
+                //    context.Users.Add(
+                //        new GeneralUser { Id = artur, Email = artur, UserName = artur, FirstName = "Artur", LastName = "Fundukyan", Telephone = "6473337777", Apartment = "640A", Street = "647 Progress Ave", City = "Scarborough", ZIP = "M1G 3T8", Province = "ON" });
+                //    context.Users.Add(new GeneralUser { Id = testUser, Email = testUser, UserName = testUser, FirstName = "Test", LastName = "Last Test", Telephone = "TEST", Apartment = "TEST", Street = "TEST Ave", City = "TEST", ZIP = "M1G 3T8", Province = "TEST" });
+
+                //    context.SaveChanges();
+                //}
+
+                GeneralUser user = await userManager.FindByEmailAsync(artur);
             if (user == null)
             {
-                user = new GeneralUser { Email = artur, UserName = artur, FirstName = "Artur", LastName = "Fundukyan", };
+                user = new GeneralUser {Email = artur, UserName = artur, FirstName = "Artur", LastName = "Fundukyan", Telephone = "6473337777", Apartment = "640A", Street = "647 Progress Ave", City = "Scarborough", ZIP = "M1G 3T8", Province = "ON" };
                 await userManager.CreateAsync(user, user1Password);
             }
 
@@ -30,7 +42,8 @@ namespace Project.Models
 
             if (test == null)
             {
-                test = new GeneralUser { Email = testUser, UserName = testUser, FirstName = "Test", LastName = "Last Test", };
+                test = new GeneralUser {Email = testUser, UserName = testUser, FirstName = "Test", LastName = "Last Test", Telephone = "TEST", Apartment = "TEST", Street = "TEST Ave", City = "TEST", ZIP = "M1G 3T8", Province = "TEST" };
+
                 await userManager.CreateAsync(test, testPassword);
             }
 

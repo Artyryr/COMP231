@@ -13,6 +13,10 @@ namespace Project.Models
         public string  ServiceTypeName { get; set; }
         public string  Description { get; set; }
 
+        public ServiceType()
+        {
+
+        }
         public ServiceType(string serviceTypeName, string description)
         {
             ServiceTypeName = serviceTypeName;

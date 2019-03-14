@@ -12,13 +12,18 @@ namespace Project.Models
         [Key]
         public int ServiceId { get; set; }
         public string ServiceName { get; set; }
-        [ForeignKey("ServiceTypeForeignKey")]
         public int ServiceTypeId { get; set; }
+        public double PricePerHour { get; set; }
 
-        public Service(string serviceName, int serviceTypeId)
+        public Service()
+        {
+
+        }
+        public Service(string serviceName, int serviceTypeId, double pricePerHour)
         {
             ServiceName = serviceName;
             ServiceTypeId = serviceTypeId;
+            PricePerHour = pricePerHour;
         }
     }
 }

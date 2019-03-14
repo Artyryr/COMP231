@@ -136,6 +136,10 @@ namespace Project.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("Apartment");
+
+                    b.Property<string>("City");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -164,12 +168,20 @@ namespace Project.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<string>("Province");
+
                     b.Property<string>("SecurityStamp");
+
+                    b.Property<string>("Street");
+
+                    b.Property<string>("Telephone");
 
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
+
+                    b.Property<string>("ZIP");
 
                     b.HasKey("Id");
 
@@ -182,25 +194,6 @@ namespace Project.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("Project.Models.Service", b =>
-                {
-                    b.Property<int>("ServiceId")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("GeneralUserId");
-
-                    b.Property<string>("ServiceName");
-
-                    b.Property<int>("ServiceTypeId");
-
-                    b.HasKey("ServiceId");
-
-                    b.HasIndex("GeneralUserId");
-
-                    b.ToTable("Service");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -246,13 +239,6 @@ namespace Project.Migrations
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Project.Models.Service", b =>
-                {
-                    b.HasOne("Project.Models.GeneralUser")
-                        .WithMany("UserServices")
-                        .HasForeignKey("GeneralUserId");
                 });
 #pragma warning restore 612, 618
         }
