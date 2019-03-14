@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Project.Infrastructure;
 //using Project.Infrastructure;
 using Project.Models;
 
@@ -12,12 +13,15 @@ namespace Project.Controllers
 {
     public class HomeController : Controller
     {
+
+        private IServiceRepository repository;
         private UserManager<GeneralUser> userManager;
         private SignInManager<GeneralUser> signInManager;
 
-        public HomeController(UserManager<GeneralUser> userMgr,
+        public HomeController(IServiceRepository repo, UserManager<GeneralUser> userMgr,
                 SignInManager<GeneralUser> signInMgr)
         {
+            repository = repo;
             userManager = userMgr;
             signInManager = signInMgr;
         }
@@ -64,19 +68,15 @@ namespace Project.Controllers
         {
             return View();
         }
+        [HttpGet]
+        public ViewResult PlumbingPage() => View(new ServicesViewModel { Services = repository.Services, ServiceTypes = repository.ServiceTypes });
 
-        public ViewResult PlumbingPage()
-        {
-            return View();
-        }
-        public ViewResult HeatingPage()
-        {
-            return View();
-        }
-        public ViewResult ElectricityPage()
-        {
-            return View();
-        }
+        [HttpGet]
+        public ViewResult HeatingPage() => View(new ServicesViewModel { Services = repository.Services, ServiceTypes = repository.ServiceTypes });
+
+        [HttpGet]
+        public ViewResult ElectricityPage() => View(new ServicesViewModel { Services = repository.Services, ServiceTypes = repository.ServiceTypes });
+
 
         [HttpPost]
         [AllowAnonymous]

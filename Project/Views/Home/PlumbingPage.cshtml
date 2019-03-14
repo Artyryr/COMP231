@@ -1,30 +1,32 @@
-﻿@{
+﻿@model ServicesViewModel
+@{
     Layout = "_Layout";
-    ViewBag.Image = "url('/images/plubmingHeader.jpg')";
+    ViewBag.Image = "url('/images/electricalHeader.jpg')";
     ViewBag.Title = "Plumbing Services";
-    ViewBag.PageName = "Plumbing";
+    ViewBag.PageName = "Plumbing Services";
+
 }
 
 <section class="ftco-section bg-light">
     <div class="container text-center">
-        <h2>Plumbing Services</h2>
+        @{
+            <h2>@Model.ServiceTypes.Where(p => p.ServiceTypeId == 1).FirstOrDefault().Description</h2>
+        }
         <div class="row d-flex no-gutters">
             <div class="col-md-6 text-center">
                 <ul class="list-group">
-                    <li class="list-group-item list-group-item-action">Leak Repair</li>
-                    <li class="list-group-item list-group-item-action">Drain Cleaning</li>
-                    <li class="list-group-item list-group-item-action">Toilet Repair</li>
-                    <li class="list-group-item list-group-item-action">Garbage Disposal Repair</li>
-                    <li class="list-group-item list-group-item-action">Water Heater Services</li>
+                    @for (int i = 0; i < Model.Services.Where(p => p.ServiceTypeId == 1).Count(); i += 2)
+                    {
+                        <li class="list-group-item list-group-item-action">	@Model.Services.ElementAt(i).ServiceName</li>
+                    }
                 </ul>
             </div>
             <div class="col-md-6 text-center">
                 <ul class="list-group">
-                    <li class="list-group-item list-group-item-action">Sewer Repair</li>
-                    <li class="list-group-item list-group-item-action">Hydro Jetting</li>
-                    <li class="list-group-item list-group-item-action">Dishwasher Installation</li>
-                    <li class="list-group-item list-group-item-action">Washing Machine Installation</li>
-                    <li class="list-group-item list-group-item-action">Other Services</li>
+                    @for (int i = 1; i < Model.Services.Where(p => p.ServiceTypeId == 1).Count(); i += 2)
+                    {
+                        <li class="list-group-item list-group-item-action">	@Model.Services.ElementAt(i).ServiceName</li>
+                    }
                 </ul>
             </div>
             <div class="col-md-12 mt-3 text-center">

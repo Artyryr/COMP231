@@ -17,10 +17,10 @@ namespace Project.Models
             if (!context.ServiceTypes.Any())
             {
                 context.ServiceTypes.AddRange(
-                    new ServiceType("Plumbing", "Different Plumbing Services"),
-                    new ServiceType("Electricity", "Different Electricity Services"),
-                    new ServiceType("Heating", "Different Heating Services"),
-                    new ServiceType("A/C", "Different A/C Services"));
+                    new ServiceType("Plumbing", "Plumbing Services"),
+                    new ServiceType("Electricity", "Electricity Services"),
+                    new ServiceType("Heating", "Heating Services"),
+                    new ServiceType("A/C", "A/C Services"));
 
                 context.SaveChanges();
             }
