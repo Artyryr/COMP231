@@ -34,6 +34,12 @@ namespace Project
                    Configuration["Data:Services:ConnectionString"]));
             services.AddTransient<IServiceRepository, ServiceRepository>();
 
+            services.AddAuthentication().AddGoogle(googleOptions =>
+            {
+                googleOptions.ClientId = Configuration["Authentication:Google:ClientId"];
+                googleOptions.ClientSecret = Configuration["Authentication:Google:ClientSecret"];
+            });
+
             services.AddMvc();
         }
 

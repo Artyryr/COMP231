@@ -6,7 +6,6 @@
     <title>@ViewBag.Title</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="google-signin-client_id" content="581054239062-63eaiqvokb985mmmit9s2628jg7d887p.apps.googleusercontent.com">
     <environment names="Development">
         <link rel="stylesheet" type="text/css" href="~/css/open-iconic-bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="~/css/animate.css">
@@ -26,6 +25,7 @@
         <link rel="stylesheet" type="text/css" href="~/css/flaticon.css">
         <link rel="stylesheet" type="text/css" href="~/css/icomoon.css">
         <link rel="stylesheet" type="text/css" href="~/css/style.css">
+        <link rel="stylesheet" type="text/css" href="~/css/search.css">
     </environment>
 </head>
 
@@ -34,15 +34,22 @@
         <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar ftco-navbar-light bg-dark scrolled awake" id="ftco-navbar" style="background-color:#3c312e">
             <div class="container">
                 <a class="navbar-brand" asp-action="Index" asp-controller="Home">Handy-Fix</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="oi oi-menu"></span> Menu
-                </button>
+                
                 <div class="collapse navbar-collapse" id="ftco-nav">
                     <ul class="navbar-nav ml-auto">
+                        <li class="icon-search2"></li>
                         <li class="nav-item"><a asp-action="Index" asp-controller="Home" class="nav-link">Home</a></li>
                         @if (User.Identity.IsAuthenticated)
                         {
-                            <li class="nav-item"><a asp-action="Logout" asp-controller="Home" class="nav-link">Logout</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+                                   aria-expanded="false">Profile</a>
+                                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                                    <a class="dropdown-item" href="#">Account</a>
+                                    <a asp-action="Logout" asp-controller="Home" class="dropdown-item">Logout</a>
+                                    
+                                </div>
+                            </li>
                         }
                         else
                         {

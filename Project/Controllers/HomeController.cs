@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -17,6 +18,7 @@ namespace Project.Controllers
         private IServiceRepository repository;
         private UserManager<GeneralUser> userManager;
         private SignInManager<GeneralUser> signInManager;
+
 
         public HomeController(IServiceRepository repo, UserManager<GeneralUser> userMgr,
                 SignInManager<GeneralUser> signInMgr)
@@ -41,21 +43,33 @@ namespace Project.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> LoginPage(LoginModel userSearch)
         {
-            if (userSearch.loggedInThroughFacebook == true)
-            {
+            ////TO DO
+            ////LOGIN IS NOT WORKING
 
-            }
-            else if (userSearch.loggedInThroughGoogle == true)
-            {
-                await signInManager.SignOutAsync();
-                if ((await signInManager.ExternalLoginSignInAsync(
-            "Google", userSearch.User.Id, false)).Succeeded)
-                {
-                    return RedirectToAction(userSearch?.ReturnUrl ?? "Index");
-                }
 
-            }
-            else if (ModelState.IsValid)
+            //if (userSearch.loggedInThroughFacebook == true)
+            //{
+
+            //}
+            //else if (userSearch.loggedInThroughGoogle == true)
+            //{
+            //    GeneralUser user = userSearch.User;
+            //    await signInManager.SignOutAsync();
+            //    //await signInManager.SignInAsync(user, false);
+
+            //    var info = signInManager.GetExternalAuthenticationSchemesAsync();
+            //    var info2 = signInManager.GetExternalAuthenticationSchemesAsync();
+            //    await signInManager.ExternalLoginSignInAsync("Google", "",false);
+
+            //    //    if ((await signInManager.ExternalLoginSignInAsync(
+            //    //"Google", userSearch.User.Id, false)).Succeeded)
+            //    //    {
+            //    return RedirectToAction(userSearch?.ReturnUrl ?? "Index");
+            //    //}
+
+            //}
+            //else
+            if (ModelState.IsValid)
             {
                 GeneralUser user =
                     await userManager.FindByEmailAsync(userSearch.Email);
