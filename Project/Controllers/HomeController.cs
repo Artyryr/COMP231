@@ -96,6 +96,26 @@ namespace Project.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        public async Task<ViewResult> ServiceBookingPage()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                GeneralUser user = await userManager.FindByNameAsync(User.Identity.Name);
+                return View(new ServiceRequestModel { User = user });
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ServiceBookingPage(ServiceRequestModel model)
+        {
+            RequestedService service = model.RequestedService;
+            repository.AddRequestedService(service);
+            return RedirectToAction("Index","Home");
+        }
+
         [HttpGet]
         public ViewResult PlumbingPage() => View(new ServicesViewModel { Services = repository.Services, ServiceTypes = repository.ServiceTypes });
 

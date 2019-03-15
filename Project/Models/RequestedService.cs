@@ -13,8 +13,12 @@ namespace Project.Models
         public int RequestedServiceId { get; set; }
         [ForeignKey("ServiceForeignKey")]
         public int ServiceId { get; set; }
-        [ForeignKey("UserForeignKey")]
-        public int UserId { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        [RegularExpression(@"\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})",
+            ErrorMessage = "Please put telephone in format \"647-333-333\" or \"647333333\" ")]
+        public string Telephone { get; set; }
+        public string Email { get; set; }
         public DateTime Date { get; set; }
         public string Apartment { get; set; }
         public string Street { get; set; }
@@ -29,10 +33,9 @@ namespace Project.Models
         //public GeneralUser User { get; set; }
 
         public RequestedService() { }
-        public RequestedService(int serviceId, int userId, DateTime date, string apartment,string street, string city, string zip, string province, double numberOfHours)
+        public RequestedService(int serviceId, string firstName, string lastName, string telephone, string email, DateTime date, string apartment,string street, string city, string zip, string province, double numberOfHours)
         {
             ServiceId = serviceId;
-            UserId = userId;
             Date = date;
             Apartment = apartment;
             Street = street;
@@ -40,6 +43,10 @@ namespace Project.Models
             ZIP = zip;
             Province = province;
             NumberOfHours = numberOfHours;
+            FirstName =firstName;
+            LastName = lastName;
+            Telephone = telephone;
+            Email = email;
         }
     }
 }

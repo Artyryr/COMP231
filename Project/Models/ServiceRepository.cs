@@ -91,7 +91,10 @@ namespace Project.Models
                 if (dbEntry != null)
                 {
                     dbEntry.ServiceId = requestedService.ServiceId;
-                    dbEntry.UserId = requestedService.UserId;
+                    dbEntry.FirstName = requestedService.FirstName;
+                    dbEntry.LastName = requestedService.LastName;
+                    dbEntry.Telephone = requestedService.Telephone;
+                    dbEntry.Email = requestedService.Email;
                     dbEntry.Date = requestedService.Date;
                     dbEntry.Apartment = requestedService.Apartment;
                     dbEntry.Street = requestedService.Street;
