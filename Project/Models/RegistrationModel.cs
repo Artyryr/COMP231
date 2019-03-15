@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Project.Models
 {
-    public class LoginModel
+    public class RegistrationModel
     {
         [Required]
         [EmailAddress]
@@ -27,11 +27,6 @@ namespace Project.Models
         [UIHint("Password")]
         [DataType(DataType.Password)]
         public string ConfirmationPassword { get; set; }
-
-
-
-        //public GeneralUser User { get; set; }
-        public bool loggedInThroughGoogle { get; set; }
-        public bool loggedInThroughFacebook { get; set; }
+        public GeneralUser User { get; set; }
     }
 }

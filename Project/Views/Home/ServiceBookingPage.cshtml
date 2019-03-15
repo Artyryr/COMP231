@@ -10,199 +10,99 @@
     <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
         <form action="" method="post">
             <div class="row">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <input type="hidden" asp-for="RequestedService.ServiceId">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="RequestedService.FirstName">First Name</label>
-                            <input asp-for="RequestedService.FirstName " type="text" value="@Model.User.FirstName" class="form-control" placeholder="First Name" data-val="true" data-val-required="The First Name is required.">
-                            <span asp-validation-for="RequestedService.FirstName" class="text-danger"></span>
-                        </div>
+                <input type="hidden" asp-for="RequestedService.ServiceId">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RequestedService.FirstName">First Name</label>
+                        <input asp-for="RequestedService.FirstName " type="text" class="form-control" placeholder="First Name" data-val="true" data-val-required="The First Name is required.">
+                        <span asp-validation-for="RequestedService.FirstName" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="RequestedService.LastName">Last Name</label>
-                            <input asp-for="RequestedService.LastName" type="text" class="form-control" value="@Model.User.LastName" placeholder="Last Name" data-val="true" data-val-required="The Last Name is required.">
-                            <span asp-validation-for="RequestedService.LastName" class="text-danger"></span>
-                        </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RequestedService.LastName">Last Name</label>
+                        <input asp-for="RequestedService.LastName" type="text" class="form-control" placeholder="Last Name" data-val="true" data-val-required="The Last Name is required.">
+                        <span asp-validation-for="RequestedService.LastName" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="RequestedService.Email">E-mail</label>
-                            <input asp-for="RequestedService.Email" type="email" class="form-control" value="@Model.User.Email" placeholder="Email" data-val="true" data-val-required="The E-mail is required.">
-                            <span asp-validation-for="RequestedService.Email" class="text-danger"></span>
-                        </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RequestedService.Email">E-mail</label>
+                        <input asp-for="RequestedService.Email" type="email" class="form-control" placeholder="Email" data-val="true" data-val-required="The E-mail is required.">
+                        <span asp-validation-for="RequestedService.Email" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Telephone</label>
-                            <input asp-for="RequestedService.Telephone" type="text" class="form-control" value="@Model.User.Telephone" placeholder="Telephone" data-val="true" data-val-required="The Telephone is required.">
-                            <span asp-validation-for="RequestedService.Telephone" class="text-danger"></span>
-                        </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RequestedService.Telephone">Telephone</label>
+                        <input asp-for="RequestedService.Telephone" type="text" class="form-control" placeholder="Telephone" data-val="true" data-val-required="The Telephone is required.">
+                        <span asp-validation-for="RequestedService.Telephone" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Date and Time</label>
-                            <input asp-for="RequestedService.Date" type="datetime-local" class="form-control" placeholder="Date and Time" data-val="true" data-val-required="The Telephone is required.">
-                            <span asp-validation-for="RequestedService.Date" class="text-danger"></span>
-                        </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RequestedService.Date">Date and Time</label>
+                        <input asp-for="RequestedService.Date" type="datetime-local" class="form-control" placeholder="Date and Time" data-val="true" data-val-required="The Telephone is required.">
+                        <span asp-validation-for="RequestedService.Date" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Duration</label>
-                            <input asp-for="RequestedService.NumberOfHours" type="number" class="form-control" placeholder="Duration" min="1" data-val="true" data-val-required="The Telephone is required.">
-                            <span asp-validation-for="RequestedService.NumberOfHours" class="text-danger"></span>
-                        </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RequestedService.NumberOfHours">Duration</label>
+                        <input asp-for="RequestedService.NumberOfHours" type="number" class="form-control" placeholder="Duration" min="1" data-val="true" data-val-required="The Telephone is required.">
+                        <span asp-validation-for="RequestedService.NumberOfHours" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Apartment</label>
-                            <input asp-for="RequestedService.Apartment" type="text" value="@Model.User.Apartment" class="form-control" placeholder="Apartment" data-val="true" data-val-required="The Apartment number is required.">
-                            <span asp-validation-for="RequestedService.Apartment" class="text-danger"></span>
-                        </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RequestedService.Apartment">Apartment</label>
+                        <input asp-for="RequestedService.Apartment" type="text" class="form-control" placeholder="Apartment" data-val="true" data-val-required="The Apartment number is required.">
+                        <span asp-validation-for="RequestedService.Apartment" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Street</label>
-                            <input asp-for="RequestedService.Street" type="text" class="form-control" value="@Model.User.Street" placeholder="Street" data-val="true" data-val-required="The Street is required.">
-                            <span asp-validation-for="RequestedService.Street" class="text-danger"></span>
-                        </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RequestedService.Street">Street</label>
+                        <input asp-for="RequestedService.Street" type="text" class="form-control" placeholder="Street" data-val="true" data-val-required="The Street is required.">
+                        <span asp-validation-for="RequestedService.Street" class="text-danger"></span>
                     </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>City</label>
-                            <input asp-for="RequestedService.City" type="text" class="form-control" value="@Model.User.City" placeholder="City" data-val="true" data-val-required="The City is required.">
-                            <span asp-validation-for="RequestedService.City" class="text-danger"></span>
-                        </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="RequestedService.City">City</label>
+                        <input asp-for="RequestedService.City" type="text" class="form-control" placeholder="City" data-val="true" data-val-required="The City is required.">
+                        <span asp-validation-for="RequestedService.City" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Zip</label>
-                            <input asp-for="RequestedService.ZIP" type="text" class="form-control" value="@Model.User.ZIP" placeholder="ZIP" data-val="true" data-val-required="The ZIP is required.">
-                            <span asp-validation-for="RequestedService.ZIP" class="text-danger"></span>
-                        </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="RequestedService.ZIP">Zip</label>
+                        <input asp-for="RequestedService.ZIP" type="text" class="form-control" placeholder="ZIP" data-val="true" data-val-required="The ZIP is required.">
+                        <span asp-validation-for="RequestedService.ZIP" class="text-danger"></span>
                     </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Province</label>
-                            <select asp-for="RequestedService.Province" ite class="form-control" data-val="true" data-val-required="The Province is required.">
-                                <option value="">No Province</option>
-                                <option value="AB">AB</option>
-                                <option value="BC">BC</option>
-                                <option value="MB">MB</option>
-                                <option value="NB">NB</option>
-                                <option value="NL">NL</option>
-                                <option value="NS">NS</option>
-                                <option value="NT">NT</option>
-                                <option value="NU">NU</option>
-                                <option value="ON">ON</option>
-                                <option value="PE">PE</option>
-                                <option value="QC">QC</option>
-                                <option value="SK">SK</option>
-                                <option value="YT">YT</option>
-                            </select>
-                            <span asp-validation-for="RequestedService.Province" class="text-danger"></span>
-                        </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label asp-for="RequestedService.Province">Province</label>
+                        <select asp-for="RequestedService.Province" ite class="form-control" data-val="true" data-val-required="The Province is required.">
+                            <option value="">No Province</option>
+                            <option value="AB">AB</option>
+                            <option value="BC">BC</option>
+                            <option value="MB">MB</option>
+                            <option value="NB">NB</option>
+                            <option value="NL">NL</option>
+                            <option value="NS">NS</option>
+                            <option value="NT">NT</option>
+                            <option value="NU">NU</option>
+                            <option value="ON">ON</option>
+                            <option value="PE">PE</option>
+                            <option value="QC">QC</option>
+                            <option value="SK">SK</option>
+                            <option value="YT">YT</option>
+                        </select>
+                        <span asp-validation-for="RequestedService.Province" class="text-danger"></span>
                     </div>
-                }
-                else
-                {
-                    <input type="hidden" asp-for="RequestedService.ServiceId">
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="User.FirstName">First Name</label>
-                            <input asp-for="User.FirstName " type="text" class="form-control" placeholder="First Name" data-val="true" data-val-required="The First Name is required.">
-                            <span asp-validation-for="User.FirstName" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="User.LastName">Last Name</label>
-                            <input asp-for="User.LastName" type="text" class="form-control" placeholder="Last Name" data-val="true" data-val-required="The Last Name is required.">
-                            <span asp-validation-for="User.LastName" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label asp-for="User.Email">E-mail</label>
-                            <input asp-for="User.Email" type="email" class="form-control" placeholder="Email" data-val="true" data-val-required="The E-mail is required.">
-                            <span asp-validation-for="User.Email" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Telephone</label>
-                            <input asp-for="User.Telephone" type="text" class="form-control" placeholder="Telephone" data-val="true" data-val-required="The Telephone is required.">
-                            <span asp-validation-for="User.Telephone" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Date and Time</label>
-                            <input asp-for="RequestedService.Date" type="datetime-local" class="form-control" placeholder="Date and Time" data-val="true" data-val-required="The Telephone is required.">
-                            <span asp-validation-for="RequestedService.Date" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Duration</label>
-                            <input asp-for="RequestedService.NumberOfHours" type="number" class="form-control" placeholder="Duration" min="1" data-val="true" data-val-required="The Telephone is required.">
-                            <span asp-validation-for="RequestedService.NumberOfHours" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Apartment</label>
-                            <input asp-for="RequestedService.Apartment" type="text" class="form-control" placeholder="Apartment" data-val="true" data-val-required="The Apartment number is required.">
-                            <span asp-validation-for="RequestedService.Apartment" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>Street</label>
-                            <input asp-for="RequestedService.Street" type="text" class="form-control" placeholder="Street" data-val="true" data-val-required="The Street is required.">
-                            <span asp-validation-for="RequestedService.Street" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="form-group">
-                            <label>City</label>
-                            <input asp-for="RequestedService.City" type="text" class="form-control" placeholder="City" data-val="true" data-val-required="The City is required.">
-                            <span asp-validation-for="RequestedService.City" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Zip</label>
-                            <input asp-for="RequestedService.ZIP" type="text" class="form-control" placeholder="ZIP" data-val="true" data-val-required="The ZIP is required.">
-                            <span asp-validation-for="RequestedService.ZIP" class="text-danger"></span>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
-                            <label>Province</label>
-                            <select asp-for="RequestedService.Province" ite class="form-control" data-val="true" data-val-required="The Province is required.">
-                                <option value="">No Province</option>
-                                <option value="AB">AB</option>
-                                <option value="BC">BC</option>
-                                <option value="MB">MB</option>
-                                <option value="NB">NB</option>
-                                <option value="NL">NL</option>
-                                <option value="NS">NS</option>
-                                <option value="NT">NT</option>
-                                <option value="NU">NU</option>
-                                <option value="ON">ON</option>
-                                <option value="PE">PE</option>
-                                <option value="QC">QC</option>
-                                <option value="SK">SK</option>
-                                <option value="YT">YT</option>
-                            </select>
-                            <span asp-validation-for="RequestedService.Province" class="text-danger"></span>
-                        </div>
-                    </div>
-                }
-
+                </div>
                 <div class="col-md-12 text-danger" asp-validation-summary="All"></div>
                 <div class="col-md-12 mt-3 text-center">
                     <div class="form-group">

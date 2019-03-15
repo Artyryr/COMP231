@@ -1,27 +1,46 @@
 ﻿@model Service
 @{
+    
     Layout = "_Layout";
     ViewBag.Image = "url('/images/bg_1.jpg')";
     ViewBag.Title = @Model.ServiceName;
     ViewBag.PageName = @Model.ServiceName;
 }
 
-<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="d-flex ftco-animate fadeInUp ftco-animated">
-                <div class=" col-12 text-center">
-                    <h2>INGREDIENTS</h2>
+<div class="row d-flex">
+    <div class="col-md-12 dish-menu">
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="d-flex ftco-animate fadeInUp ftco-animated">
+                        <div class="col-12 text-center">
+                            <hr />
+                            <h2>Service Description</h2>
+                            <hr />
+                        </div>
+                    </div>
                 </div>
-            </div>
-
-            <hr />
-            <div class="d-flex ftco-animate fadeInUp ftco-animated">
-                <div class="text d-flex">
-                    <div class="col-12 text-center">
-                        <h3>
-                            @Model.ServiceName
-                        </h3>
+                <div class="col-lg-4">
+                    <h4>Service: </h4>
+                </div>
+                <div class="col-lg-6">
+                    <h4>@Model.ServiceName</h4>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Price Per Hour:</h4>
+                </div>
+                <div class="col-lg-6">
+                    <h4>$@Model.PricePerHour</h4>
+                </div>
+                <div class="col-lg-4">
+                    <h4>Description:</h4>
+                </div>
+                <div class="col-lg-6">
+                    <h4>@Model.Description</h4>
+                </div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <a class="btn btn-primary py-3 px-5 text-center" asp-action="ServiceBookingPage" asp-route-id="@Model.ServiceId">Register for a service</a>
                     </div>
                 </div>
             </div>

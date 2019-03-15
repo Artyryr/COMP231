@@ -98,34 +98,40 @@ namespace Project.Controllers
         }
 
         [HttpGet]
-        public async Task<ViewResult> ServiceBookingPage()
+        public async Task<IActionResult> ServiceBookingPage(int serviceId)
         {
             if (User.Identity.IsAuthenticated)
             {
                 GeneralUser user = await userManager.FindByNameAsync(User.Identity.Name);
-                return View(new ServiceRequestModel { User = user });
+                return View(new ServiceRequestModel {RequestedService = new RequestedService {ServiceId = serviceId,FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Telephone = user.Telephone, Apartment = user.Apartment, City = user.City, Street = user.Street, Province = user.Province, ZIP = user.ZIP} });
             }
-            return View();
+            return View(new ServiceRequestModel { ServiceId = serviceId });
         }
 
         //ADD NEW PART
         [HttpPost]
         public ActionResult ServiceBookingPage(ServiceRequestModel model)
         {
-            RequestedService service = model.RequestedService;
-            repository.AddRequestedService(service);
-            return RedirectToAction("Index","Home");
+            if (ModelState.IsValid)
+            {
+                RequestedService service = model.RequestedService;
+                service.ServiceId = model.ServiceId;
+                repository.AddRequestedService(service);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         [HttpGet]
         public ActionResult ServicePage(int id)
         {
             Service service = repository.Services.Where(s => s.ServiceId == id).FirstOrDefault();
+            ViewBag.Id = id;
             return View(service);
         }
-
-
-
 
         [HttpGet]
         public ViewResult PlumbingPage() => View(new ServicesViewModel { Services = repository.Services, ServiceTypes = repository.ServiceTypes });
@@ -139,7 +145,7 @@ namespace Project.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> RegistrationPage(LoginModel newUser)
+        public async Task<IActionResult> RegistrationPage(RegistrationModel newUser)
         {
             if (ModelState.IsValid)
             {

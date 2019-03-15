@@ -9,5 +9,6 @@ namespace Project.Models
     {
         public RequestedService RequestedService { get; set; }
         public GeneralUser User { get; set; }
+        public int ServiceId { get; set; }
     }
 }
