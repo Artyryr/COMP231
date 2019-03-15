@@ -31,6 +31,12 @@ namespace Project.Migrations.ApplicationDb
 
                     b.Property<DateTime>("Date");
 
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
                     b.Property<double>("NumberOfHours");
 
                     b.Property<string>("Province");
@@ -39,7 +45,7 @@ namespace Project.Migrations.ApplicationDb
 
                     b.Property<string>("Street");
 
-                    b.Property<int>("UserId");
+                    b.Property<string>("Telephone");
 
                     b.Property<string>("ZIP");
 
@@ -53,6 +59,8 @@ namespace Project.Migrations.ApplicationDb
                     b.Property<int>("ServiceId")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Description");
 
                     b.Property<double>("PricePerHour");
 

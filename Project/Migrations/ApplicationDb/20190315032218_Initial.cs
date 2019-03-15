@@ -15,7 +15,10 @@ namespace Project.Migrations.ApplicationDb
                     RequestedServiceId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ServiceId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: false),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    Telephone = table.Column<string>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
                     Date = table.Column<DateTime>(nullable: false),
                     Apartment = table.Column<string>(nullable: true),
                     Street = table.Column<string>(nullable: true),
@@ -37,7 +40,8 @@ namespace Project.Migrations.ApplicationDb
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ServiceName = table.Column<string>(nullable: true),
                     ServiceTypeId = table.Column<int>(nullable: false),
-                    PricePerHour = table.Column<double>(nullable: false)
+                    PricePerHour = table.Column<double>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
