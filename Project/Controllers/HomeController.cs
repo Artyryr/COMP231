@@ -108,6 +108,7 @@ namespace Project.Controllers
             return View();
         }
 
+        //ADD NEW PART
         [HttpPost]
         public ActionResult ServiceBookingPage(ServiceRequestModel model)
         {
@@ -115,6 +116,16 @@ namespace Project.Controllers
             repository.AddRequestedService(service);
             return RedirectToAction("Index","Home");
         }
+
+        [HttpGet]
+        public ActionResult ServicePage(int id)
+        {
+            Service service = repository.Services.Where(s => s.ServiceId == id).FirstOrDefault();
+            return View(service);
+        }
+
+
+
 
         [HttpGet]
         public ViewResult PlumbingPage() => View(new ServicesViewModel { Services = repository.Services, ServiceTypes = repository.ServiceTypes });

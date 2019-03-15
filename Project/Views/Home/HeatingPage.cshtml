@@ -10,26 +10,20 @@
     <div class="container">
         <div class="row d-flex no-gutters">
             <div class="col-md-6 text-center">
-                    @{
-                        <h2>@Model.ServiceTypes.Where(p => p.ServiceTypeId == 3).FirstOrDefault().Description</h2>
-                    }
-                
+                @{
+                    <h2>@Model.ServiceTypes.Where(p => p.ServiceTypeId == 3).FirstOrDefault().Description</h2>
+                }
+
                 <ul class="list-group">
                     @{
                         foreach (var item in Model.Services)
                         {
                             if (item.ServiceTypeId == 3)
                             {
-                                <li class="list-group-item list-group-item-action">@item.ServiceName</li>
+                                <li class="list-group-item list-group-item-action"> <a asp-action="ServicePage" asp-route-id="@item.ServiceId"> @item.ServiceName </a></li>
                             }
                         }
                     }
-                    @*<li class="list-group-item list-group-item-action">Boiler Installation</li>
-            <li class="list-group-item list-group-item-action">Fireplace Installation</li>
-            <li class="list-group-item list-group-item-action">Gas Line Installation</li>
-            <li class="list-group-item list-group-item-action">Tankless Water Heater</li>
-            <li class="list-group-item list-group-item-action">Air Duct Cleaning</li>
-            <li class="list-group-item list-group-item-action">Maintaince Services</li>*@
                 </ul>
             </div>
             <div class="col-md-6 text-center">
@@ -44,13 +38,10 @@
                         {
                             if (item.ServiceTypeId == 4)
                             {
-                                <li class="list-group-item list-group-item-action">@item.ServiceName</li>
+                                <li class="list-group-item list-group-item-action"> <a asp-action="ServicePage" asp-route-id="@item.ServiceId"> @item.ServiceName </a></li>
                             }
                         }
                     }
-                    @*<li class="list-group-item list-group-item-action">Air Conditioning Installation</li>
-            <li class="list-group-item list-group-item-action">Air Conditioning Repair</li>
-            <li class="list-group-item list-group-item-action">Air Conditioning Service</li>*@
                 </ul>
             </div>
             <div class="col-md-12 mt-3 text-center">

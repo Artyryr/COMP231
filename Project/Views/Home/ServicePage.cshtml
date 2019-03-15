@@ -1,0 +1,30 @@
+﻿@model Service
+@{
+    Layout = "_Layout";
+    ViewBag.Image = "url('/images/bg_1.jpg')";
+    ViewBag.Title = @Model.ServiceName;
+    ViewBag.PageName = @Model.ServiceName;
+}
+
+<div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+    <div class="row">
+        <div class="col-lg-6">
+            <div class="d-flex ftco-animate fadeInUp ftco-animated">
+                <div class=" col-12 text-center">
+                    <h2>INGREDIENTS</h2>
+                </div>
+            </div>
+
+            <hr />
+            <div class="d-flex ftco-animate fadeInUp ftco-animated">
+                <div class="text d-flex">
+                    <div class="col-12 text-center">
+                        <h3>
+                            @Model.ServiceName
+                        </h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
