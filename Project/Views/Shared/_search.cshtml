@@ -1,7 +1,7 @@
-﻿@*@Html.Partial("AddReview", new Review { RecipeId = Model.RecipeId });*@
+﻿@model  SearchModel
 
-<form class="form-inline ml-auto">
-    <input type="text" class="searchTerm" placeholder="What are you looking for?">
+<form asp-action="SearchResult" asp-controller="Home" method="post" enctype="multipart/form-data" class="form-inline ml-auto">
+    <input asp-for="SearchName" type="text" class="searchTerm" placeholder="What are you looking for?">
     <button type="submit" class="searchButton">
         <i class="icon-search2"></i>
     </button>

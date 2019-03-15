@@ -19,7 +19,11 @@ namespace Project.Controllers
         private UserManager<GeneralUser> userManager;
         private SignInManager<GeneralUser> signInManager;
 
-
+        public async Task<GeneralUser> GetCurrentUserAsync()
+        {
+            GeneralUser user = await userManager.FindByNameAsync(User.Identity.Name);
+            return user;
+        }
         public HomeController(IServiceRepository repo, UserManager<GeneralUser> userMgr,
                 SignInManager<GeneralUser> signInMgr)
         {
@@ -98,24 +102,22 @@ namespace Project.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ServiceBookingPage(int serviceId)
+        public async Task<IActionResult> ServiceBookingPage(int id)
         {
             if (User.Identity.IsAuthenticated)
             {
-                GeneralUser user = await userManager.FindByNameAsync(User.Identity.Name);
-                return View(new ServiceRequestModel {RequestedService = new RequestedService {ServiceId = serviceId,FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Telephone = user.Telephone, Apartment = user.Apartment, City = user.City, Street = user.Street, Province = user.Province, ZIP = user.ZIP} });
+                GeneralUser user = await GetCurrentUserAsync();
+                return View(new ServiceRequestModel {RequestedService = new RequestedService {ServiceId = id,FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Telephone = user.Telephone, Apartment = user.Apartment, City = user.City, Street = user.Street, Province = user.Province, ZIP = user.ZIP} });
             }
-            return View(new ServiceRequestModel { ServiceId = serviceId });
+            return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id }});
         }
 
-        //ADD NEW PART
         [HttpPost]
         public ActionResult ServiceBookingPage(ServiceRequestModel model)
         {
             if (ModelState.IsValid)
             {
                 RequestedService service = model.RequestedService;
-                service.ServiceId = model.ServiceId;
                 repository.AddRequestedService(service);
                 return RedirectToAction("Index", "Home");
             }
@@ -131,6 +133,13 @@ namespace Project.Controllers
             Service service = repository.Services.Where(s => s.ServiceId == id).FirstOrDefault();
             ViewBag.Id = id;
             return View(service);
+        }
+
+        [HttpPost]
+        public ActionResult SearchResult(SearchModel search)
+        {
+            search.Services = repository.Services.Where(p => p.ServiceName.ToLower().Contains(search.SearchName)).ToList();
+            return View(search);
         }
 
         [HttpGet]

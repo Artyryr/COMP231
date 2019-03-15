@@ -10,9 +10,9 @@
     <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
         <form action="" method="post">
             <div class="row">
-                <input type="hidden" asp-for="RequestedService.ServiceId">
                 <div class="col-md-6">
                     <div class="form-group">
+                        <input asp-for="RequestedService.ServiceId" />
                         <label asp-for="RequestedService.FirstName">First Name</label>
                         <input asp-for="RequestedService.FirstName " type="text" class="form-control" placeholder="First Name" data-val="true" data-val-required="The First Name is required.">
                         <span asp-validation-for="RequestedService.FirstName" class="text-danger"></span>
