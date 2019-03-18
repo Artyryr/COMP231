@@ -7,14 +7,13 @@
     ViewBag.PageName = "User Login";
 }
 <meta name="google-signin-client_id" content="555073913037-198rf5nhims0b5hbfdddifp2vcv6a9n2.apps.googleusercontent.com">
-@* BNfDoTDSkM_MwSIqmzs5cxFN   - client secret *@
+
 <div class="row d-flex">
     <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
         <form asp-action="LoginPage" asp-controller="Home" method="post" enctype="multipart/form-data">
             <input type="hidden" asp-for="ReturnUrl" />
             <input type="hidden" asp-for="loggedInThroughGoogle" />
             <input type="hidden" asp-for="loggedInThroughFacebook" />
-            @*<input type="hidden" asp-for="User.Id" />*@
 
             <div class="row">
                 <div class="col-md-6">
@@ -35,12 +34,13 @@
                 <div class="col-md-12 mt-3 text-center">
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary py-3 px-5 text-center" id="submit">Log In</button>
-                        <a href="#" onclick="signOut()">Sign out</a>
+                        
                     </div>
                 </div>
                 <div class="col-md-6 text-center">
                     <div class="form-group text-center">
                         <div class="g-signin2 text-center" data-onsuccess="onSignIn"></div>
+                        <a href="#" onclick="signOut()">Sign out from Google</a>
                     </div>
                 </div>
                 <div class="col-md-12 mt-3 text-center">
@@ -63,15 +63,13 @@
 
             auth2.signOut();
             auth2.disconnect();
-            
-            //document.location.href = "https://www.google.com/accounts/Logout?continue=https://appengine.google.com/_ah/logout?continue=http://localhost:54694/Home/";
         }
 
     function onSignIn(googleUser) {
         // Useful data for your client-side scripts:
         var profile = googleUser.getBasicProfile();
 
-        console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+        console.log("ID: " + profile.getId());
         console.log('Full Name: ' + profile.getName());
         console.log('Given Name: ' + profile.getGivenName());
         console.log('Family Name: ' + profile.getFamilyName());
@@ -84,7 +82,6 @@
 
         document.getElementById("loggedInThroughGoogle").value = true;
         document.getElementById("User_Id").value = id_token;
-        //document.getElementById("submit").click();
     }
     </script>
 </environment>

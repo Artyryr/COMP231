@@ -41,14 +41,14 @@ namespace Project.Migrations
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
                     AccessFailedCount = table.Column<int>(nullable: false),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    Telephone = table.Column<string>(nullable: true),
-                    Apartment = table.Column<string>(nullable: true),
-                    Street = table.Column<string>(nullable: true),
-                    City = table.Column<string>(nullable: true),
-                    ZIP = table.Column<string>(nullable: true),
-                    Province = table.Column<string>(nullable: true)
+                    FirstName = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(nullable: false),
+                    Telephone = table.Column<string>(nullable: false),
+                    Apartment = table.Column<string>(nullable: false),
+                    Street = table.Column<string>(nullable: false),
+                    City = table.Column<string>(nullable: false),
+                    ZIP = table.Column<string>(nullable: false),
+                    Province = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

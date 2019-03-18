@@ -25,29 +25,38 @@ namespace Project.Migrations.ApplicationDb
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Apartment");
+                    b.Property<string>("Apartment")
+                        .IsRequired();
 
-                    b.Property<string>("City");
+                    b.Property<string>("City")
+                        .IsRequired();
 
                     b.Property<DateTime>("Date");
 
-                    b.Property<string>("Email");
+                    b.Property<string>("Email")
+                        .IsRequired();
 
-                    b.Property<string>("FirstName");
+                    b.Property<string>("FirstName")
+                        .IsRequired();
 
-                    b.Property<string>("LastName");
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
                     b.Property<double>("NumberOfHours");
 
-                    b.Property<string>("Province");
+                    b.Property<string>("Province")
+                        .IsRequired();
 
                     b.Property<int>("ServiceId");
 
-                    b.Property<string>("Street");
+                    b.Property<string>("Street")
+                        .IsRequired();
 
-                    b.Property<string>("Telephone");
+                    b.Property<string>("Telephone")
+                        .IsRequired();
 
-                    b.Property<string>("ZIP");
+                    b.Property<string>("ZIP")
+                        .IsRequired();
 
                     b.HasKey("RequestedServiceId");
 

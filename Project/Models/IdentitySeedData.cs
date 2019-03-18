@@ -19,18 +19,6 @@ namespace Project.Models
             UserManager<GeneralUser> userManager = app.ApplicationServices
                .GetRequiredService<UserManager<GeneralUser>>();
 
-                //IdentityDbContext context = app.ApplicationServices
-                //    .GetRequiredService<IdentityDbContext>();
-
-                //if (!context.Users.Any())
-                //{
-                //    context.Users.Add(
-                //        new GeneralUser { Id = artur, Email = artur, UserName = artur, FirstName = "Artur", LastName = "Fundukyan", Telephone = "6473337777", Apartment = "640A", Street = "647 Progress Ave", City = "Scarborough", ZIP = "M1G 3T8", Province = "ON" });
-                //    context.Users.Add(new GeneralUser { Id = testUser, Email = testUser, UserName = testUser, FirstName = "Test", LastName = "Last Test", Telephone = "TEST", Apartment = "TEST", Street = "TEST Ave", City = "TEST", ZIP = "M1G 3T8", Province = "TEST" });
-
-                //    context.SaveChanges();
-                //}
-
                 GeneralUser user = await userManager.FindByEmailAsync(artur);
             if (user == null)
             {

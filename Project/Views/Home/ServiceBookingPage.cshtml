@@ -12,7 +12,6 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input asp-for="RequestedService.ServiceId" />
                         <label asp-for="RequestedService.FirstName">First Name</label>
                         <input asp-for="RequestedService.FirstName " type="text" class="form-control" placeholder="First Name" data-val="true" data-val-required="The First Name is required.">
                         <span asp-validation-for="RequestedService.FirstName" class="text-danger"></span>
@@ -42,7 +41,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="RequestedService.Date">Date and Time</label>
-                        <input asp-for="RequestedService.Date" type="datetime-local" class="form-control" placeholder="Date and Time" data-val="true" data-val-required="The Telephone is required.">
+                        <input asp-for="RequestedService.Date" type="datetime-local"  min="@DateTime.Now" value="@DateTime.Now" class="form-control" placeholder="Date and Time" data-val="true" data-val-required="The Telephone is required." required>
                         <span asp-validation-for="RequestedService.Date" class="text-danger"></span>
                     </div>
                 </div>

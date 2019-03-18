@@ -35,19 +35,5 @@ namespace Project.Models
 
         [Required(ErrorMessage = "The Province is required.")]
         public string Province { get; set; }
-        //public List<Service> UserServices { get; set; }
-
-        //public GeneralUser(string email,string firstName, string lastName, string telephone, string apartment, string street, string city, string zip, string province)
-        //{
-        //    Email =
-        //    FirstName = firstName;
-        //    LastName = lastName;
-        //    Telephone = telephone;
-        //    Apartment = apartment;
-        //    Street = street;
-        //    City = city;
-        //    ZIP = zip;
-        //    Province = province;
-        //}
     }
 }

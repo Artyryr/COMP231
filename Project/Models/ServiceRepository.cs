@@ -39,7 +39,6 @@ namespace Project.Models
             }
             context.SaveChanges();
         }
-
         public void RemoveService(int id)
         {
             if (context.Services.Where(p => p.ServiceId == id).FirstOrDefault() != null)
@@ -48,7 +47,6 @@ namespace Project.Models
             }
             context.SaveChanges();
         }
-
         public void AddServiceType(ServiceType serviceType)
         {
             if (serviceType.ServiceTypeId == 0)
@@ -68,7 +66,6 @@ namespace Project.Models
             }
             context.SaveChanges();
         }
-
         public void RemoveServiceType(int id)
         {
             if (context.ServiceTypes.Where(p => p.ServiceTypeId == id).FirstOrDefault() != null)

@@ -27,7 +27,7 @@ namespace Project.Models
 
         [Required(ErrorMessage = "The E-mail is required.")]
         public string Email { get; set; }
-
+         
         [Required(ErrorMessage = "The Date is required.")]
         public DateTime Date { get; set; }
 
