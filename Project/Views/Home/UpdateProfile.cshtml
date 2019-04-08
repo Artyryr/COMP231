@@ -1,0 +1,108 @@
+﻿@model GeneralUser
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    Layout = "_Layout";
+    ViewBag.Image = "url('/images/registration.jpg')";
+    ViewBag.Title = "Update Profile";
+    ViewBag.PageName = "Update Profile";
+}
+
+<div class="row d-flex">
+    <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
+        <form action="" method="post">
+                <div class="container">
+                    <div class="row justify-content-center mb-1 pb-1">
+                        <div class="col-md-7 text-center heading-section  ftco-animate">
+                            <h2>Personal Information</h2>
+                        </div>
+                    </div>
+                </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="FirstName">First Name</label>
+                        <input asp-for="FirstName " type="text" class="form-control" placeholder="First Name" data-val="true" data-val-required="The First Name is required.">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="LastName">Last Name</label>
+                        <input asp-for="LastName" type="text" class="form-control" placeholder="Last Name" data-val="true" data-val-required="The Last Name is required.">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Telephone</label>
+                        <input asp-for="Telephone" type="text" class="form-control" placeholder="Telephone" data-val="true" data-val-required="The Telephone is required.">
+                        <span asp-validation-for="Telephone" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-center mb-1 pb-1">
+                        <div class="col-md-7 text-center heading-section  ftco-animate">
+                            <h2>Personal Address</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Apartment</label>
+                        <input asp-for="Apartment" type="text" class="form-control" placeholder="Apartment" data-val="true" data-val-required="The Apartment number is required.">
+                        <span asp-validation-for="Apartment" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Street</label>
+                        <input asp-for="Street" type="text" class="form-control" placeholder="Street" data-val="true" data-val-required="The Street is required.">
+                        <span asp-validation-for="Street" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>City</label>
+                        <input asp-for="City" type="text" class="form-control" placeholder="City" data-val="true" data-val-required="The City is required.">
+                        <span asp-validation-for="City" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Zip</label>
+                        <input asp-for="ZIP" type="text" class="form-control" placeholder="ZIP" data-val="true" data-val-required="The ZIP is required.">
+                        <span asp-validation-for="ZIP" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label>Province</label>
+                        <select asp-for="Province" class="form-control" data-val="true" data-val-required="The Province is required.">
+                            <option value="">No Province</option>
+                            <option value="AB">AB</option>
+                            <option value="BC">BC</option>
+                            <option value="MB">MB</option>
+                            <option value="NB">NB</option>
+                            <option value="NL">NL</option>
+                            <option value="NS">NS</option>
+                            <option value="NT">NT</option>
+                            <option value="NU">NU</option>
+                            <option value="ON">ON</option>
+                            <option value="PE">PE</option>
+                            <option value="QC">QC</option>
+                            <option value="SK">SK</option>
+                            <option value="YT">YT</option>
+                        </select>
+                        <span asp-validation-for="Province" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-12 text-danger" asp-validation-summary="All"></div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary py-3 px-5 text-center">Update Information</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

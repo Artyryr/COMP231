@@ -27,7 +27,7 @@ namespace Project.Models
             if (!context.Services.Any())
             {
                 context.Services.AddRange(
-                    new Service("Leak Repair", 1, 70.0, "As soon as you detect a water leak in your home, it is critical to get it repaired as soon as possible to avoid damage to your belongings and expensive water bills. The most obvious household plumbing leaks include dripping faucets and leaking water heaters. Have a water leak in your basement?"),
+                    new Service { ServiceName = "Leak Repair", ServiceTypeId = 1, PricePerHour = 70.0, Description = "As soon as you detect a water leak in your home, it is critical to get it repaired as soon as possible to avoid damage to your belongings and expensive water bills. The most obvious household plumbing leaks include dripping faucets and leaking water heaters. Have a water leak in your basement?"},
                     new Service("Drain Cleaning", 1, 70, "Some Generic Description of a service should be written here."),
                     new Service("Toilet Repair", 1, 70, "Some Generic Description of a service should be written here."),
                     new Service("Garbage Disposal Repair", 1, 70, "Some Generic Description of a service should be written here."),
@@ -57,6 +57,14 @@ namespace Project.Models
                     new Service("Air Conditioning Repair", 4, 80, "Some Generic Description of a service should be written here."),
                     new Service("Air Conditioning Service", 4, 80.0, "Some Generic Description of a service should be written here.")
                     );
+                context.SaveChanges();
+            }
+            if (!context.Reviews.Any())
+            {
+                context.Reviews.AddRange(
+                    new Review { ServiceId = 1,UserId = "ArtyryrF@gmail.com", Rating = 5, UserName = "Artur Fundukyan", ReviewText = "The problem was solved much faster that I have expected", Date = DateTime.Now },
+                    new Review { ServiceId = 2,UserId = "ArtyryrF@gmail.com", Rating = 2, UserName = "Sharang Verma", ReviewText = "Caution: Don't try this at home", Date = DateTime.Now },
+                    new Review { ServiceId = 1,UserId = "Test@gmail.com", Rating = 5, UserName = "Quang", ReviewText = "It was amazingly great!", Date = DateTime.Now });
                 context.SaveChanges();
             }
         }

@@ -19,6 +19,35 @@ namespace Project.Migrations.ApplicationDb
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("Project.Models.Payment", b =>
+                {
+                    b.Property<int>("PaymentId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("BillingAddress")
+                        .IsRequired();
+
+                    b.Property<int>("CVV")
+                        .HasMaxLength(3);
+
+                    b.Property<int>("CardNumber");
+
+                    b.Property<DateTime>("ExpiryDate");
+
+                    b.Property<string>("NameOnCard")
+                        .IsRequired();
+
+                    b.Property<string>("PostalCode")
+                        .IsRequired();
+
+                    b.Property<string>("UserId");
+
+                    b.HasKey("PaymentId");
+
+                    b.ToTable("Payments");
+                });
+
             modelBuilder.Entity("Project.Models.RequestedService", b =>
                 {
                     b.Property<int>("RequestedServiceId")
@@ -44,6 +73,8 @@ namespace Project.Migrations.ApplicationDb
 
                     b.Property<double>("NumberOfHours");
 
+                    b.Property<int?>("PaymentId");
+
                     b.Property<string>("Province")
                         .IsRequired();
 
@@ -55,12 +86,42 @@ namespace Project.Migrations.ApplicationDb
                     b.Property<string>("Telephone")
                         .IsRequired();
 
+                    b.Property<double>("TotalPrice");
+
                     b.Property<string>("ZIP")
                         .IsRequired();
 
                     b.HasKey("RequestedServiceId");
 
+                    b.HasIndex("PaymentId");
+
                     b.ToTable("RequestedServices");
+                });
+
+            modelBuilder.Entity("Project.Models.Review", b =>
+                {
+                    b.Property<int>("ReviewId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("Rating");
+
+                    b.Property<string>("ReviewText")
+                        .IsRequired();
+
+                    b.Property<int>("ServiceId");
+
+                    b.Property<string>("UserId");
+
+                    b.Property<string>("UserName");
+
+                    b.HasKey("ReviewId");
+
+                    b.HasIndex("ServiceId");
+
+                    b.ToTable("Reviews");
                 });
 
             modelBuilder.Entity("Project.Models.Service", b =>
@@ -95,6 +156,21 @@ namespace Project.Migrations.ApplicationDb
                     b.HasKey("ServiceTypeId");
 
                     b.ToTable("ServiceTypes");
+                });
+
+            modelBuilder.Entity("Project.Models.RequestedService", b =>
+                {
+                    b.HasOne("Project.Models.Payment", "Payment")
+                        .WithMany()
+                        .HasForeignKey("PaymentId");
+                });
+
+            modelBuilder.Entity("Project.Models.Review", b =>
+                {
+                    b.HasOne("Project.Models.Service")
+                        .WithMany("Reviews")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

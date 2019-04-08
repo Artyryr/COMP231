@@ -14,5 +14,7 @@ namespace Project.Models
         public DbSet<Service> Services { get; set; }
         public DbSet<ServiceType> ServiceTypes { get; set; }
         public DbSet<RequestedService> RequestedServices { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<Payment> Payments { get; set; }
     }
 }

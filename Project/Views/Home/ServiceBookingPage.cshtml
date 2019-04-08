@@ -10,6 +10,13 @@
     <div class="col-md-12 ftco-animate makereservation p-5 bg-light fadeInUp ftco-animated">
         <form action="" method="post">
             <div class="row">
+                <div class="container">
+                    <div class="row justify-content-center mb-1 pb-1">
+                        <div class="col-md-7 text-center heading-section  ftco-animate">
+                            <h2>Request Information</h2>
+                        </div>
+                    </div>
+                </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="RequestedService.FirstName">First Name</label>
@@ -41,7 +48,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="RequestedService.Date">Date and Time</label>
-                        <input asp-for="RequestedService.Date" type="datetime-local"  min="@DateTime.Now" value="@DateTime.Now" class="form-control" placeholder="Date and Time" data-val="true" data-val-required="The Telephone is required." required>
+                        <input asp-for="RequestedService.Date" type="datetime-local" min="@DateTime.Now" value="@DateTime.Now" class="form-control" placeholder="Date and Time" data-val="true" data-val-required="The Telephone is required." required>
                         <span asp-validation-for="RequestedService.Date" class="text-danger"></span>
                     </div>
                 </div>
@@ -84,6 +91,70 @@
                     <div class="form-group">
                         <label asp-for="RequestedService.Province">Province</label>
                         <select asp-for="RequestedService.Province" ite class="form-control" data-val="true" data-val-required="The Province is required.">
+                            <option value="">No Province</option>
+                            <option value="AB">AB</option>
+                            <option value="BC">BC</option>
+                            <option value="MB">MB</option>
+                            <option value="NB">NB</option>
+                            <option value="NL">NL</option>
+                            <option value="NS">NS</option>
+                            <option value="NT">NT</option>
+                            <option value="NU">NU</option>
+                            <option value="ON">ON</option>
+                            <option value="PE">PE</option>
+                            <option value="QC">QC</option>
+                            <option value="SK">SK</option>
+                            <option value="YT">YT</option>
+                        </select>
+                        <span asp-validation-for="RequestedService.Province" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="row justify-content-center mb-1 pb-1">
+                        <div class="col-md-7 text-center heading-section  ftco-animate">
+                            <h2>Payments Information</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Payment.CardNumber">Street</label>
+                        <input asp-for="Payment.CardNumber" type="text" class="form-control" placeholder="Card Number" data-val="true" data-val-required="The Card Number is required.">
+                        <span asp-validation-for="Payment.CardNumber" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Payment.NameOnCard">Name on Card</label>
+                        <input asp-for="Payment.NameOnCard" type="text" value="(@Model.RequestedService.FirstName + @Model.RequestedService.LastName)" class="form-control" placeholder="NameOnCard" data-val="true" data-val-required="The Name On the Card Number is required.">
+                        <span asp-validation-for="Payment.NameOnCard" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Payment.ExpiryDate">Expiry Date</label>
+                        <input asp-for="Payment.ExpiryDate" type="text" class="form-control" placeholder="Expiry Date" data-val="true" data-val-required="The Expiry Date is required.">
+                        <span asp-validation-for="Payment.ExpiryDate" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Payment.CVV">CVV</label>
+                        <input asp-for="Payment.CVV" type="text" class="form-control" placeholder="CVV" data-val="true" data-val-required="The CVV is required.">
+                        <span asp-validation-for="Payment.CVV" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Payment.BillingAddress">Billing Address</label>
+                        <input asp-for="Payment.BillingAddress" type="text" class="form-control" placeholder="Billing Address" data-val="true" data-val-required="The Billing Address is required.">
+                        <span asp-validation-for="Payment.BillingAddress" class="text-danger"></span>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Payment.PostalCode">Postal Code</label>
+                        <select asp-for="Payment.PostalCode" ite class="form-control" data-val="true" data-val-required="The Province is required.">
                             <option value="">No Province</option>
                             <option value="AB">AB</option>
                             <option value="BC">BC</option>

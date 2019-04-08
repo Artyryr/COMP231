@@ -17,6 +17,8 @@ namespace Project.Models
         public IQueryable<Service> Services => context.Services;
         public IQueryable<ServiceType> ServiceTypes => context.ServiceTypes;
         public IQueryable<RequestedService> RequestedServices => context.RequestedServices;
+        public IQueryable<Review> Reviews => context.Reviews;
+        public IQueryable<Payment> Payments => context.Payments;
 
         public void AddService(Service service)
         {
@@ -108,6 +110,53 @@ namespace Project.Models
             if (context.RequestedServices.Where(p => p.RequestedServiceId == id).FirstOrDefault() != null)
             {
                 context.RequestedServices.Remove(context.RequestedServices.Where(p => p.RequestedServiceId == id).FirstOrDefault());
+            }
+            context.SaveChanges();
+        }
+        public void AddReview(Review review)
+        {
+            if (review.ReviewId == 0)
+            {
+                context.Reviews.Add(review);
+            }
+            else
+            {
+                Review dbEntry = context.Reviews
+                    .FirstOrDefault(p => p.ReviewId == review.ReviewId);
+
+                if (dbEntry != null)
+                {
+                    dbEntry.ReviewText = review.ReviewText;
+                    dbEntry.ServiceId = review.ServiceId;
+                    dbEntry.Rating = review.Rating;
+                    dbEntry.UserName = review.UserName;
+                    dbEntry.Date = review.Date;
+                    dbEntry.UserId = review.UserId;
+                }
+            }
+            context.SaveChanges();
+        }
+
+        public void AddPayment(Payment payment)
+        {
+            if (payment.PaymentId == 0)
+            {
+                context.Payments.Add(payment);
+            }
+            else
+            {
+                Payment dbEntry = context.Payments
+                    .FirstOrDefault(p => p.PaymentId == payment.PaymentId);
+
+                if (dbEntry != null)
+                {
+                    dbEntry.BillingAddress = payment.BillingAddress;
+                    dbEntry.CardNumber = payment.CardNumber;
+                    dbEntry.CVV = payment.CVV;
+                    dbEntry.ExpiryDate = payment.ExpiryDate;
+                    dbEntry.NameOnCard = payment.NameOnCard;
+                    dbEntry.PostalCode = payment.PostalCode;
+                }
             }
             context.SaveChanges();
         }

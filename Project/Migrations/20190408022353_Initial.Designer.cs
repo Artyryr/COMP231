@@ -10,7 +10,7 @@ using Project.Models;
 namespace Project.Migrations
 {
     [DbContext(typeof(IdentityDbContext))]
-    [Migration("20190317234340_Initial")]
+    [Migration("20190408022353_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -146,6 +146,8 @@ namespace Project.Migrations
 
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<double>("Discount");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);

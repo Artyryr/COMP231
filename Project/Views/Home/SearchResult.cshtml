@@ -14,6 +14,12 @@
                 <h3>Search</h3>
                 <partial name="_search" />
             </div>
+
+        </div>
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-12 text-center heading-section  ftco-animate">
+                
+            </div>
         </div>
         @if (Model.Services.Count > 0)
         {
@@ -24,7 +30,7 @@
                         @for (int i = 0; i < Model.Services.Count(); i += 2)
                         {
                             <a asp-action="ServicePage" asp-route-id="@Model.Services.ElementAt(i).ServiceId">
-                                <li class="list-group-item list-group-item-action">	@Model.Services.ElementAt(i).ServiceName</li>
+                                <li class="list-group-item list-group-item-action filterDiv type#@Model.Services.ElementAt(i).ServiceTypeId">	@Model.Services.ElementAt(i).ServiceName</li>
                             </a>
                         }
 
@@ -35,7 +41,7 @@
                         @for (int i = 1; i < Model.Services.Count(); i += 2)
                         {
                             <a asp-action="ServicePage" asp-route-id="@Model.Services.ElementAt(i).ServiceId">
-                                <li class="list-group-item list-group-item-action">	@Model.Services.ElementAt(i).ServiceName</li>
+                                <li class="list-group-item list-group-item-action filterDiv type#@Model.Services.ElementAt(i).ServiceTypeId">	@Model.Services.ElementAt(i).ServiceName</li>
                             </a>
                         }
                     </ul>
@@ -48,3 +54,10 @@
         }
     </div>
 </section>
+
+<script>
+    function filter() {
+        var button = document.getElementById("applyFilter");
+        button.click();
+    }
+</script>

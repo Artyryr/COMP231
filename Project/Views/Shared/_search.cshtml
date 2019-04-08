@@ -1,8 +1,28 @@
-﻿@model  SearchModel
+﻿@model SearchModel
 
 <form asp-action="SearchResult" asp-controller="Home" method="post" enctype="multipart/form-data" class="form-inline ml-auto">
-    <input asp-for="SearchName" type="text" class="searchTerm" placeholder="What are you looking for?">
-    <button type="submit" class="searchButton">
-        <i class="icon-search2"></i>
-    </button>
+
+
+    <div class="col-md-12 text-center heading-section  ftco-animate">
+        <input asp-for="SearchName" type="text" class="searchTerm" placeholder="What are you looking for?">
+        <button type="submit" class="searchButton">
+            <i class="icon-search2"></i>
+        </button>
+    </div>
+    <div class=" col-md-12">
+        <div class="row justify-content-center">
+
+            <div class="col-md-2"><input type="radio" checked="" value="0" id="Filter" name="Filter">All</div>
+            <div class="col-md-3"><input type="radio" value="1" id="Filter" name="Filter">Plumbing</div>
+            <div class="col-md-3">
+                <input type="radio" asp-action="SearchResult" value="2" id="Filter" name="Filter">Electricity
+            </div>
+            <div class="col-md-2">
+                <input type="radio" value="3" id="Filter" name="Filter">Heating
+            </div>
+            <div class="col-md-2">
+                <input type="radio" value="4" id="Filter" name="Filter">A/C
+            </div>
+        </div>
+    </div>
 </form>

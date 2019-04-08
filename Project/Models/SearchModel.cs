@@ -9,5 +9,6 @@ namespace Project.Models
     {
         public string SearchName{ get; set; }
         public List<Service> Services { get; set; }
+        public string Filter { get; set; }
     }
 }

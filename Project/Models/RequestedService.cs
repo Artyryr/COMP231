@@ -49,11 +49,8 @@ namespace Project.Models
 
         [Required(ErrorMessage = "The Number of hours is required.")]
         public double NumberOfHours { get; set; }
-
-        //[ForeignKey("ServiceForeignKey")]
-        //public Service Service { get; set; }
-        //[ForeignKey("UserForeignKey")]
-        //public GeneralUser User { get; set; }
+        public double TotalPrice { get; set; }
+        public Payment Payment { get; set; }
 
         public RequestedService() { }
         public RequestedService(int serviceId, string firstName, string lastName, string telephone, string email, DateTime date, string apartment,string street, string city, string zip, string province, double numberOfHours)
@@ -70,6 +67,11 @@ namespace Project.Models
             LastName = lastName;
             Telephone = telephone;
             Email = email;
+        }
+
+        public void AddPayment(Payment payment)
+        {
+            Payment = payment;
         }
     }
 }

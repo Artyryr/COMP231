@@ -145,6 +145,8 @@ namespace Project.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
+                    b.Property<double>("Discount");
+
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 

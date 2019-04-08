@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Project.Infrastructure;
-//using Project.Infrastructure;
 using Project.Models;
 
 namespace Project.Controllers
@@ -107,18 +106,35 @@ namespace Project.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 GeneralUser user = await GetCurrentUserAsync();
-                return View(new ServiceRequestModel {RequestedService = new RequestedService {ServiceId = id,FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Telephone = user.Telephone, Apartment = user.Apartment, City = user.City, Street = user.Street, Province = user.Province, ZIP = user.ZIP} });
+                Payment payment = repository.Payments.Where(p => p.UserId == user.Id).FirstOrDefault();
+                if (payment != null)
+                {
+                    return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id, FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Telephone = user.Telephone, Apartment = user.Apartment, City = user.City, Street = user.Street, Province = user.Province, ZIP = user.ZIP }, Payment = payment });
+                }
+                else { return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id, FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Telephone = user.Telephone, Apartment = user.Apartment, City = user.City, Street = user.Street, Province = user.Province, ZIP = user.ZIP } }); }
             }
-            return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id }});
+            return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id } });
         }
 
         [HttpPost]
-        public ActionResult ServiceBookingPage(ServiceRequestModel model)
+        public async Task<ActionResult> ServiceBookingPage(ServiceRequestModel model)
         {
             if (ModelState.IsValid)
             {
-                RequestedService service = model.RequestedService;
-                repository.AddRequestedService(service);
+                GeneralUser user = await GetCurrentUserAsync();
+                Service service = repository.Services.Where(p => p.ServiceId == model.RequestedService.ServiceId).FirstOrDefault();
+                RequestedService requestedService = model.RequestedService;
+                Payment payment = model.Payment;
+
+                requestedService.AddPayment(payment);
+                requestedService.TotalPrice = requestedService.NumberOfHours * service.PricePerHour - (requestedService.NumberOfHours * service.PricePerHour * user.Discount);
+
+                repository.AddPayment(payment);
+                repository.AddRequestedService(requestedService);
+
+                model.Discount = user.Discount;
+                model.RequestedService = requestedService;
+
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -131,15 +147,87 @@ namespace Project.Controllers
         public ActionResult ServicePage(int id)
         {
             Service service = repository.Services.Where(s => s.ServiceId == id).FirstOrDefault();
+            List<Review> reviews = (from rev in repository.Reviews
+                                    where rev.ServiceId == id
+                                    orderby rev.Date descending
+                                    select rev).ToList();
+            service.AddReviews(reviews);
             ViewBag.Id = id;
             return View(service);
         }
 
         [HttpPost]
+        public async Task<ActionResult> ServicePage(Review review)
+        {
+            Service service = repository.Services.Where(s => s.ServiceId == review.ServiceId).FirstOrDefault();
+            if (ModelState.IsValid)
+            {
+                GeneralUser user = await GetCurrentUserAsync();
+                review.UserName = user.FirstName + " " + user.LastName;
+                review.UserId = user.Id;
+                review.Date = DateTime.Now;
+                repository.AddReview(review);
+            }
+            List<Review> reviews = (from rev in repository.Reviews
+                                    where rev.ServiceId == review.ServiceId
+                                    orderby rev.Date descending
+                                    select rev).ToList();
+
+            service.AddReviews(reviews);
+            return View(service);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> UpdateProfile()
+        {
+            GeneralUser user = await GetCurrentUserAsync();
+            return View(user);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult> UpdateProfile(GeneralUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    GeneralUser currentUser = await GetCurrentUserAsync();
+                    currentUser.Apartment = user.Apartment;
+                    currentUser.City = user.City;
+                    currentUser.FirstName = user.FirstName;
+                    currentUser.LastName = user.LastName;
+                    currentUser.PhoneNumber = user.PhoneNumber;
+                    currentUser.Province = user.Province;
+                    currentUser.Street = user.Street;
+                    currentUser.Telephone = user.Telephone;
+                    currentUser.ZIP = user.ZIP;
+                    await userManager.UpdateAsync(currentUser);
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    return View(user);
+                }
+            }
+            return View(user);
+        }
+
+        [HttpPost]
         public ActionResult SearchResult(SearchModel search)
         {
-            search.Services = repository.Services.Where(p => p.ServiceName.ToLower().Contains(search.SearchName)).ToList();
-            return View(search);
+            if (search.Filter == null || search.Filter == "0")
+            {
+                search.Services = repository.Services.Where(p => p.ServiceName.ToLower().Contains(search.SearchName)).ToList();
+                return View(search);
+            }
+            else
+            {
+                search.Services = repository.Services.Where(p => p.ServiceName.ToLower().Contains(search.SearchName) && p.ServiceTypeId == Convert.ToInt32(search.Filter)).ToList();
+                return View(search);
+            }
         }
 
         [HttpGet]
@@ -164,6 +252,7 @@ namespace Project.Controllers
                     {
                         newUser.User.UserName = newUser.Email;
                         newUser.User.Email = newUser.Email;
+                        newUser.User.Discount = 5;
                         GeneralUser user = await userManager.FindByEmailAsync(newUser.Email);
                         if (user == null)
                         {

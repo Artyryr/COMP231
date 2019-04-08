@@ -15,6 +15,7 @@ namespace Project.Models
         public int ServiceTypeId { get; set; }
         public double PricePerHour { get; set; }
         public string Description { get; set; }
+        public List<Review> Reviews { get; set; }
 
         public Service()
         {
@@ -32,6 +33,15 @@ namespace Project.Models
             ServiceTypeId = serviceTypeId;
             PricePerHour = pricePerHour;
             Description = description;
+        }
+
+        public void AddReviews(List<Review> reviews)
+        {
+            Reviews = reviews;
+        }
+        public void AddOneReview(Review review)
+        {
+            Reviews.Add(review);
         }
     }
 }

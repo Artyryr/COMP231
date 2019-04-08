@@ -19,6 +19,18 @@
         color: #9DBFAF;
     }
 
+.searchButton2 {
+    position: absolute;
+    width: 80px;
+    height: 50px;
+    border: 1px solid #00B4CC;
+    background: #00B4CC;
+    text-align: center;
+    color: #fff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 20px;
+}
 .searchButton {
     position: absolute;
     right: -50px;

@@ -1,0 +1,31 @@
+﻿@model Review
+<form asp-action="ServicePage" method="post">
+    <input type="hidden" asp-for="@Model.ServiceId">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label asp-for="@Model.Rating">Rating</label>
+                <input type="number" asp-for="@Model.Rating" class="form-control" min="1" max="5" value="5">
+                <span asp-validation-for="@Model.Rating" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-12">
+            <div class="form-group">
+                <label asp-for="@Model.ReviewText">Review Text</label>
+                <textarea asp-for="@Model.ReviewText" class="form-control" rows="5" placeholder="Review"></textarea>
+                <span asp-validation-for="@Model.ReviewText" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="col-md-6 mt-3 text-center">
+            <div class="form-group">
+                <input type="submit" value="Add Review" class="btn btn-primary py-3 px-5 text-center">
+            </div>
+        </div>
+        <div class="col-md-6 mt-3 text-center">
+            <div class="form-group">
+                <input type="reset" value="Reset" class="btn btn-primary py-3 px-5 text-center">
+            </div>
+        </div>
+    </div>
+    <hr />
+</form>

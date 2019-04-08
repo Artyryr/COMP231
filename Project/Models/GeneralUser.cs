@@ -17,7 +17,7 @@ namespace Project.Models
 
         [Required(ErrorMessage = "The Telephone is required.")]
         [RegularExpression(@"\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})",
-            ErrorMessage = "Please put telephone in format \"647-333-333\" or \"647333333\" ")]
+            ErrorMessage = "Please put telephone in format \"647-333-4444\" or \"6473334444\" ")]
         public string Telephone { get; set; }
 
         [Required(ErrorMessage = "The Apartment is required.")]
@@ -35,5 +35,7 @@ namespace Project.Models
 
         [Required(ErrorMessage = "The Province is required.")]
         public string Province { get; set; }
+
+        public double Discount { get; set; }
     }
 }
