@@ -13,7 +13,6 @@ namespace Project.Controllers
 {
     public class HomeController : Controller
     {
-
         private IServiceRepository repository;
         private UserManager<GeneralUser> userManager;
         private SignInManager<GeneralUser> signInManager;
@@ -46,8 +45,6 @@ namespace Project.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> LoginPage(LoginModel userSearch)
         {
-            ////TO DO
-            ////LOGIN IS NOT WORKING
 
 
             //if (userSearch.loggedInThroughFacebook == true)
@@ -106,12 +103,12 @@ namespace Project.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 GeneralUser user = await GetCurrentUserAsync();
-                Payment payment = repository.Payments.Where(p => p.UserId == user.Id).FirstOrDefault();
+                Payment payment = repository.Payments.Where(p => p.UserId == user.Id).LastOrDefault();
                 if (payment != null)
                 {
-                    return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id, FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Telephone = user.Telephone, Apartment = user.Apartment, City = user.City, Street = user.Street, Province = user.Province, ZIP = user.ZIP }, Payment = payment });
+                    return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id, UserId = user.Id, FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Telephone = user.Telephone, Apartment = user.Apartment, City = user.City, Street = user.Street, Province = user.Province, ZIP = user.ZIP }, Payment = payment });
                 }
-                else { return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id, FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Telephone = user.Telephone, Apartment = user.Apartment, City = user.City, Street = user.Street, Province = user.Province, ZIP = user.ZIP } }); }
+                else { return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id, UserId = user.Id, FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Telephone = user.Telephone, Apartment = user.Apartment, City = user.City, Street = user.Street, Province = user.Province, ZIP = user.ZIP } }); }
             }
             return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id } });
         }
@@ -121,26 +118,76 @@ namespace Project.Controllers
         {
             if (ModelState.IsValid)
             {
-                GeneralUser user = await GetCurrentUserAsync();
-                Service service = repository.Services.Where(p => p.ServiceId == model.RequestedService.ServiceId).FirstOrDefault();
-                RequestedService requestedService = model.RequestedService;
-                Payment payment = model.Payment;
+                try
+                {
+                    if (User.Identity.IsAuthenticated)
+                    {
+                        GeneralUser user = await GetCurrentUserAsync();
+                        Service service = repository.Services.Where(p => p.ServiceId == model.RequestedService.ServiceId).FirstOrDefault();
+                        RequestedService requestedService = model.RequestedService;
+                        Payment payment = model.Payment;
+                        payment.UserId = user.Id;
 
-                requestedService.AddPayment(payment);
-                requestedService.TotalPrice = requestedService.NumberOfHours * service.PricePerHour - (requestedService.NumberOfHours * service.PricePerHour * user.Discount);
+                        requestedService.AddPayment(payment);
+                        requestedService.UserId = user.Id;
+                        requestedService.TotalPrice = requestedService.NumberOfHours * service.PricePerHour - (requestedService.NumberOfHours * service.PricePerHour * user.Discount / 100);
 
-                repository.AddPayment(payment);
-                repository.AddRequestedService(requestedService);
+                        repository.AddPayment(payment);
+                        repository.AddRequestedService(requestedService);
 
-                model.Discount = user.Discount;
-                model.RequestedService = requestedService;
+                        model.Discount = user.Discount;
+                        model.RequestedService = requestedService;
+                        model.Service = service;
+                        model.User = user;
 
-                return RedirectToAction("Index", "Home");
+                        return RedirectToAction("BookingConfirmationPage", new BookingConfirmationModel { Discount = model.Discount, ServiceId = model.Service.ServiceId, RequestedServiceId = model.RequestedService.RequestedServiceId, PaymentId = model.Payment.PaymentId });
+                    }
+                    else
+                    {
+                        Service service = repository.Services.Where(p => p.ServiceId == model.RequestedService.ServiceId).FirstOrDefault();
+                        RequestedService requestedService = model.RequestedService;
+                        Payment payment = model.Payment;
+
+                        requestedService.AddPayment(payment);
+                        requestedService.TotalPrice = requestedService.NumberOfHours * service.PricePerHour;
+
+                        repository.AddRequestedService(requestedService);
+                        model.RequestedService = requestedService;
+                        model.Service = service;
+
+                        return RedirectToAction("BookingConfirmationPage", new BookingConfirmationModel { ServiceId = model.Service.ServiceId, RequestedServiceId = model.RequestedService.RequestedServiceId, PaymentId = model.Payment.PaymentId });
+                    }
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                    return View(model);
+                }
             }
             else
             {
                 return View(model);
             }
+        }
+
+        [HttpGet]
+        public ActionResult BookingConfirmationPage(BookingConfirmationModel model)
+        {
+            Service service = repository.Services.Where(p => p.ServiceId == model.ServiceId).FirstOrDefault();
+            RequestedService requested = repository.RequestedServices.Where(p => p.RequestedServiceId == model.RequestedServiceId).FirstOrDefault();
+            Payment payment = repository.Payments.Where(p => p.PaymentId == model.PaymentId).LastOrDefault();
+            ServiceRequestModel serviceRequest = new ServiceRequestModel();
+
+            if (User.Identity.IsAuthenticated)
+            {
+                serviceRequest = new ServiceRequestModel { Service = service, RequestedService = requested, Payment = payment, Discount = model.Discount };
+            }
+            else
+            {
+                serviceRequest = new ServiceRequestModel { Service = service, RequestedService = requested, Payment = payment };
+            }
+
+            return View(serviceRequest);
         }
 
         [HttpGet]
@@ -175,6 +222,30 @@ namespace Project.Controllers
 
             service.AddReviews(reviews);
             return View(service);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<ActionResult> ProfilePage()
+        {
+            GeneralUser user = await GetCurrentUserAsync();
+            List<RequestedService> requestedServices = (from service in repository.RequestedServices
+                                                        where service.UserId == user.Id
+                                                        orderby service.Date ascending
+                                                        select service).ToList();
+            List<ServiceRequestSummary> services = new List<ServiceRequestSummary>();
+            Payment payment = repository.Payments.Where(p => p.UserId == user.Id).LastOrDefault();
+
+            foreach (var item in requestedServices)
+            {
+                Service ser = (Service)(from service in repository.Services
+                                        where service.ServiceId == item.ServiceId
+                                        select service).FirstOrDefault();
+                ServiceRequestSummary summary = new ServiceRequestSummary { ServiceName = ser.ServiceName, PricePerHour = ser.PricePerHour, Date = item.Date, NumberOfHours = item.NumberOfHours, TotalPrice = item.TotalPrice };
+                services.Add(summary);
+            }
+            ProfileModel model = new ProfileModel { RequestedServices = services, User = user, UserPayment = payment };
+            return View(model);
         }
 
         [HttpGet]
@@ -238,7 +309,6 @@ namespace Project.Controllers
 
         [HttpGet]
         public ViewResult ElectricityPage() => View(new ServicesViewModel { Services = repository.Services, ServiceTypes = repository.ServiceTypes });
-
 
         [HttpPost]
         [AllowAnonymous]

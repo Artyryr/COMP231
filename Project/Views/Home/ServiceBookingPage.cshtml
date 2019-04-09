@@ -19,6 +19,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
+                        <input asp-for="RequestedService.ServiceId" type="hidden"/>
                         <label asp-for="RequestedService.FirstName">First Name</label>
                         <input asp-for="RequestedService.FirstName " type="text" class="form-control" placeholder="First Name" data-val="true" data-val-required="The First Name is required.">
                         <span asp-validation-for="RequestedService.FirstName" class="text-danger"></span>
@@ -126,14 +127,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Payment.NameOnCard">Name on Card</label>
-                        <input asp-for="Payment.NameOnCard" type="text" value="(@Model.RequestedService.FirstName + @Model.RequestedService.LastName)" class="form-control" placeholder="NameOnCard" data-val="true" data-val-required="The Name On the Card Number is required.">
+                        <input asp-for="Payment.NameOnCard" type="text" class="form-control" placeholder="NameOnCard" data-val="true" data-val-required="The Name On the Card Number is required.">
                         <span asp-validation-for="Payment.NameOnCard" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label asp-for="Payment.ExpiryDate">Expiry Date</label>
-                        <input asp-for="Payment.ExpiryDate" type="text" class="form-control" placeholder="Expiry Date" data-val="true" data-val-required="The Expiry Date is required.">
+                        <input asp-for="Payment.ExpiryDate" type="date" min="@DateTime.Now" class="form-control" placeholder="Payment ExpiryDate" data-val="true" data-val-required="The Telephone is required." required>
                         <span asp-validation-for="Payment.ExpiryDate" class="text-danger"></span>
                     </div>
                 </div>
@@ -153,24 +154,9 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label asp-for="Payment.PostalCode">Postal Code</label>
-                        <select asp-for="Payment.PostalCode" ite class="form-control" data-val="true" data-val-required="The Province is required.">
-                            <option value="">No Province</option>
-                            <option value="AB">AB</option>
-                            <option value="BC">BC</option>
-                            <option value="MB">MB</option>
-                            <option value="NB">NB</option>
-                            <option value="NL">NL</option>
-                            <option value="NS">NS</option>
-                            <option value="NT">NT</option>
-                            <option value="NU">NU</option>
-                            <option value="ON">ON</option>
-                            <option value="PE">PE</option>
-                            <option value="QC">QC</option>
-                            <option value="SK">SK</option>
-                            <option value="YT">YT</option>
-                        </select>
-                        <span asp-validation-for="RequestedService.Province" class="text-danger"></span>
+                        <label asp-for="Payment.PostalCode">Zip</label>
+                        <input asp-for="Payment.PostalCode" type="text" class="form-control" placeholder="ZIP" data-val="true" data-val-required="The ZIP is required.">
+                        <span asp-validation-for="Payment.PostalCode" class="text-danger"></span>
                     </div>
                 </div>
                 <div class="col-md-12 text-danger" asp-validation-summary="All"></div>

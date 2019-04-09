@@ -1,0 +1,76 @@
+﻿@model ServiceRequestModel
+@{
+    Layout = "_Layout";
+    ViewBag.Image = "url('/images/bg_1.jpg')";
+    ViewBag.Title = "Booking Confirmation";
+    ViewBag.PageName = "Booking Confirmation";
+}
+
+<div class="row d-flex">
+    <div class="col-md-12 dish-menu">
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="d-flex ftco-animate fadeInUp ftco-animated">
+                        <div class="col-12 text-center">
+                            <hr />
+                            <h1>Booking Confirmation</h1>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-12">
+                    <div class="d-flex ftco-animate fadeInUp ftco-animated">
+                        <div class="col-12 text-center">
+                            <h2>The Reservation was done!</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Service: </h3>
+                </div>
+                <div class="col-lg-6">
+                    <h4>@Model.Service.ServiceName</h4>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Price Per Hour:</h3>
+                </div>
+                <div class="col-lg-6">
+                    <h4>@Model.Service.PricePerHour.ToString("C2")</h4>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Number of Hours:</h3>
+                </div>
+                <div class="col-lg-6">
+                    <h3>@Model.RequestedService.NumberOfHours</h3>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Date:</h3>
+                </div>
+                <div class="col-lg-6">
+                    <h4>@Model.RequestedService.Date</h4>
+                </div>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <div class="col-lg-4">
+                        <h3>Discount:</h3>
+                    </div>
+                    <div class="col-lg-6">
+                        <h4>@Model.Discount %</h4>
+                    </div>
+                }
+                <div class="col-lg-4">
+                    <h3>Total Price:</h3>
+                </div>
+                <div class="col-lg-6">
+                    <h4>@Model.RequestedService.TotalPrice.ToString("C2")</h4>
+                </div>
+                <div class="col-md-12 mt-3 text-center">
+                    <div class="form-group">
+                        <a class="btn btn-primary py-3 px-5 text-center" asp-action="Index">Back to Main Page</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

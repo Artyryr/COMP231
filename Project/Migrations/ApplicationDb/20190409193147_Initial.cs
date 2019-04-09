@@ -15,10 +15,10 @@ namespace Project.Migrations.ApplicationDb
                     PaymentId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(nullable: true),
-                    CardNumber = table.Column<int>(nullable: false),
+                    CardNumber = table.Column<string>(nullable: false),
                     BillingAddress = table.Column<string>(nullable: false),
                     ExpiryDate = table.Column<DateTime>(nullable: false),
-                    CVV = table.Column<int>(maxLength: 3, nullable: false),
+                    CVV = table.Column<int>(nullable: false),
                     NameOnCard = table.Column<string>(nullable: false),
                     PostalCode = table.Column<string>(nullable: false)
                 },
@@ -64,6 +64,7 @@ namespace Project.Migrations.ApplicationDb
                     RequestedServiceId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     ServiceId = table.Column<int>(nullable: false),
+                    UserId = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: false),
                     LastName = table.Column<string>(nullable: false),
                     Telephone = table.Column<string>(nullable: false),

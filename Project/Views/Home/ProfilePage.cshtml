@@ -1,0 +1,175 @@
+﻿@model ProfileModel
+@{
+    Layout = "_Layout";
+    ViewBag.Image = "url('/images/bg_1.jpg')";
+    ViewBag.Title = "Profile Page";
+    ViewBag.PageName = "Profile Page";
+}
+
+<div class="row d-flex">
+    <div class="col-md-12 dish-menu">
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="row text-center">
+                <div class="col-lg-12">
+                    <div class="d-flex ftco-animate fadeInUp ftco-animated">
+                        <div class="col-12 text-center">
+                            <hr />
+                            <h2>Personal Information </h2>
+                            <hr />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <h3 style="color:orange">First Name: </h3>
+                </div>
+                <div class="col-lg-3">
+                    <h4>@Model.User.FirstName</h4>
+                </div>
+                <div class="col-lg-3">
+                    <h3 style="color:orange">Last Name: </h3>
+                </div>
+                <div class="col-lg-3">
+                    <h4>@Model.User.LastName</h4>
+                </div>
+                <div class="col-lg-3">
+                    <h3 style="color:orange">Telephone:</h3>
+                </div>
+                <div class="col-lg-3">
+                    <h4>@Model.User.Telephone</h4>
+                </div>
+                <div class="col-lg-3">
+                    <h3 style="color:orange">Discount:</h3>
+                </div>
+                <div class="col-lg-3">
+                    <h4>@Model.User.Discount %</h4>
+                </div>
+                <div class="col-lg-3">
+                    <h3 style="color:orange">Apartment:</h3>
+                </div>
+                <div class="col-lg-3">
+                    <h4>@Model.User.Apartment</h4>
+                </div>
+                <div class="col-lg-3">
+                    <h3 style="color:orange">Street:</h3>
+                </div>
+                <div class="col-lg-3">
+                    <h4>@Model.User.Street</h4>
+                </div>
+                <div class="col-lg-3">
+                    <h3 style="color:orange">City:</h3>
+                </div>
+                <div class="col-lg-3">
+                    <h4>@Model.User.City</h4>
+                </div>
+                <div class="col-lg-3">
+                    <h3 style="color:orange">Province:</h3>
+                </div>
+                <div class="col-lg-3">
+                    <h4>@Model.User.Province</h4>
+                </div>
+                <div class="col-lg-3">
+                    <h3 style="color:orange">ZIP:</h3>
+                </div>
+                <div class="col-lg-3">
+                    <h4>@Model.User.ZIP</h4>
+                </div>
+                @if (Model.UserPayment != null)
+                {
+                    <div class="col-lg-12">
+                        <div class="d-flex ftco-animate fadeInUp ftco-animated">
+                            <div class="col-12 text-center">
+                                <hr />
+                                <h2>Credit Card Information</h2>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <h3 style="color:orange">Card Number: </h3>
+                    </div>
+                    <div class="col-lg-6">
+                        <h4>@Model.UserPayment.CardNumber</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <h3 style="color:orange">Name On Card: </h3>
+                    </div>
+                    <div class="col-lg-6">
+                        <h4>@Model.UserPayment.NameOnCard</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <h3 style="color:orange">Billing Address:</h3>
+                    </div>
+                    <div class="col-lg-6">
+                        <h4>@Model.UserPayment.BillingAddress</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <h3 style="color:orange">Expiry Date:</h3>
+                    </div>
+                    <div class="col-lg-6">
+                        <h4>@Model.UserPayment.ExpiryDate</h4>
+                    </div>
+                    <div class="col-lg-4">
+                        <h3 style="color:orange">Postal Code:</h3>
+                    </div>
+                    <div class="col-lg-6">
+                        <h4>@Model.UserPayment.PostalCode</h4>
+                    </div>
+                }
+                @if (Model.RequestedServices != null)
+                {
+                    <div class="col-lg-12">
+                        <div class="d-flex ftco-animate fadeInUp ftco-animated">
+                            <div class="col-12 text-center">
+                                <hr />
+                                <h2>Requested Services</h2>
+                                <hr />
+                            </div>
+                        </div>
+                    </div>
+                    @foreach (var service in Model.RequestedServices)
+                    {
+                        <div class="col-lg-4">
+                            <h3 style="color:orange">Service: </h3>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>@service.ServiceName</h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <h3 style="color:orange">Price Per Hour:</h3>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>@service.PricePerHour.ToString("C2")</h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <h3 style="color:orange">Number of Hours:</h3>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>@service.NumberOfHours</h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <h3 style="color:orange">Date:</h3>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>@service.Date</h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <h3 style="color:orange">Discount:</h3>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>@Model.User.Discount %</h4>
+                        </div>
+                        <div class="col-lg-4">
+                            <h3 style="color:orange">Total Price:</h3>
+                        </div>
+                        <div class="col-lg-6">
+                            <h4>@service.TotalPrice.ToString("C2")</h4>
+                        </div>
+                        <div class="col-lg-12">
+                            <hr />
+                        </div>
+                    }
+                }
+            </div>
+        </div>
+    </div>
+</div>

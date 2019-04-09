@@ -13,8 +13,8 @@ namespace Project.Models
         public string UserId { get; set; }
 
         [Required(ErrorMessage = "The Card Number is required.")]
-        [CreditCard]
-        public int CardNumber { get; set; }
+        [RegularExpression("[0-9]{4}[-. ]?[0-9]{4}[-. ]?[0-9]{4}[-. ]?[0-9]{4}[-. ]?")]
+        public string CardNumber { get; set; }
 
         [Required(ErrorMessage = "The Billing Address is required.")]
         public string BillingAddress { get; set; }
@@ -23,8 +23,6 @@ namespace Project.Models
         public DateTime ExpiryDate { get; set; }
 
         [Required(ErrorMessage = "The Province is required.")]
-        [MinLength(3)]
-        [MaxLength(3)]
         public int CVV { get; set; }
 
         [Required(ErrorMessage = "The Name is Required.")]

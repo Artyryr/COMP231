@@ -13,6 +13,7 @@ namespace Project.Models
         public int RequestedServiceId { get; set; }
         [ForeignKey("ServiceForeignKey")]
         public int ServiceId { get; set; }
+        public string UserId { get; set; }
 
         [Required(ErrorMessage = "The First Name is required.")]
         public string FirstName { get; set; }

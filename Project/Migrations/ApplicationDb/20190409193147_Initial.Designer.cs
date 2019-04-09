@@ -10,7 +10,7 @@ using Project.Models;
 namespace Project.Migrations.ApplicationDb
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190408022405_Initial")]
+    [Migration("20190409193147_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -30,10 +30,10 @@ namespace Project.Migrations.ApplicationDb
                     b.Property<string>("BillingAddress")
                         .IsRequired();
 
-                    b.Property<int>("CVV")
-                        .HasMaxLength(3);
+                    b.Property<int>("CVV");
 
-                    b.Property<int>("CardNumber");
+                    b.Property<string>("CardNumber")
+                        .IsRequired();
 
                     b.Property<DateTime>("ExpiryDate");
 
@@ -89,6 +89,8 @@ namespace Project.Migrations.ApplicationDb
                         .IsRequired();
 
                     b.Property<double>("TotalPrice");
+
+                    b.Property<string>("UserId");
 
                     b.Property<string>("ZIP")
                         .IsRequired();

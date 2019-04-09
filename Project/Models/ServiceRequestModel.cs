@@ -12,5 +12,6 @@ namespace Project.Models
         public int ServiceId { get; set; }
         public Payment Payment { get; set; }
         public double Discount { get; set; }
+        public Service Service{ get; set; }
     }
 }

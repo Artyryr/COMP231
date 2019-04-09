@@ -28,10 +28,10 @@ namespace Project.Migrations.ApplicationDb
                     b.Property<string>("BillingAddress")
                         .IsRequired();
 
-                    b.Property<int>("CVV")
-                        .HasMaxLength(3);
+                    b.Property<int>("CVV");
 
-                    b.Property<int>("CardNumber");
+                    b.Property<string>("CardNumber")
+                        .IsRequired();
 
                     b.Property<DateTime>("ExpiryDate");
 
@@ -87,6 +87,8 @@ namespace Project.Migrations.ApplicationDb
                         .IsRequired();
 
                     b.Property<double>("TotalPrice");
+
+                    b.Property<string>("UserId");
 
                     b.Property<string>("ZIP")
                         .IsRequired();
