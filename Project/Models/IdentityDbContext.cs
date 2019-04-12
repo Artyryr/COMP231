@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Project.Models
 {
+    /// <summary>
+    /// Access to Users Database
+    /// </summary>
     public class IdentityDbContext : IdentityDbContext<GeneralUser>
     {
         public IdentityDbContext(DbContextOptions<IdentityDbContext> options)

@@ -8,6 +8,9 @@ using System.Threading.Tasks;
 
 namespace Project.Models
 {
+    /// <summary>
+    /// Fulfill the database with initial values
+    /// </summary>
     public class IdentitySeedData
     {
         private const string artur = "ArtyryrF@gmail.com";

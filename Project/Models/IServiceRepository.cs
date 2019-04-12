@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Project.Models
 {
+    /// <summary>
+    /// Interface for handeling interactions with database
+    /// </summary>
     public interface IServiceRepository
     {
         IQueryable<Service> Services { get; }

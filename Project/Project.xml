@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Project</name>
+    </assembly>
+    <members>
+        <member name="T:Project.Controllers.HomeController">
+            <summary>
+            Controller class that handles transactions between pages
+            </summary>
+        </member>
+        <member name="M:Project.Controllers.HomeController.GetCurrentUserAsync">
+            <summary>
+            Method for getting information about logged in user
+            </summary>
+            <returns>
+            Instance of current user
+            </returns>
+        </member>
+        <member name="M:Project.Controllers.HomeController.Index">
+            <summary>
+            Method that shows index page.
+            </summary>
+        </member>
+        <member name="M:Project.Controllers.HomeController.LoginPage(System.String)">
+            <summary>
+            Method that shows Login Page
+            </summary>
+        </member>
+        <member name="M:Project.Controllers.HomeController.LoginPage(Project.Models.LoginModel)">
+            <summary>
+            Method that used for login functionaluty
+            </summary>
+            <param name="userSearch">Login information of user</param>
+        </member>
+        <member name="M:Project.Controllers.HomeController.Logout(System.String)">
+            <summary>
+            Method that handles logout feature
+            </summary>
+        </member>
+        <member name="M:Project.Controllers.HomeController.RegistrationPage">
+            <summary>
+            Shows Registration Page
+            </summary>
+        </member>
+        <member name="M:Project.Controllers.HomeController.ServiceBookingPage(System.Int32)">
+            <summary>
+            Shows Page for booking a specific service
+            </summary>
+            <param name="id">Id of a service</param>
+        </member>
+        <member name="M:Project.Controllers.HomeController.ServiceBookingPage(Project.Models.ServiceRequestModel)">
+            <summary>
+            Get the request for booking of a specific service
+            </summary>
+            <param name="model">Service model</param>
+        </member>
+        <member name="M:Project.Controllers.HomeController.BookingConfirmationPage(Project.Models.BookingConfirmationModel)">
+            <summary>
+            Shows the page of booking confirmation
+            </summary>
+        </member>
+        <member name="M:Project.Controllers.HomeController.ServicePage(System.Int32)">
+            <summary>
+            Shows a page of a specific service
+            </summary>
+            <param name="id">Id of a specific service</param>
+        </member>
+        <member name="M:Project.Controllers.HomeController.ServicePage(Project.Models.Review)">
+            <summary>
+            Handles addition of a review for a specific service
+            </summary>
+            <param name="review">Review</param>
+        </member>
+        <member name="M:Project.Controllers.HomeController.ProfilePage">
+            <summary>
+            Show a page of a personal profile
+            </summary>
+        </member>
+        <member name="M:Project.Controllers.HomeController.UpdateProfile">
+            <summary>
+            Shows a form for profile update
+            </summary>
+        </member>
+        <member name="M:Project.Controllers.HomeController.UpdateProfile(Project.Models.GeneralUser)">
+            <summary>
+            Handles update of user profile
+            </summary>
+            <param name="user">User information</param>
+            <returns></returns>
+        </member>
+        <member name="M:Project.Controllers.HomeController.SearchResult(Project.Models.SearchModel)">
+            <summary>
+            Shows a page with search results
+            </summary>
+        </member>
+        <member name="M:Project.Controllers.HomeController.PlumbingPage">
+            <summary>
+            SHows a page with all plumbing services
+            </summary>
+        </member>
+        <member name="M:Project.Controllers.HomeController.HeatingPage">
+            <summary>
+            Shows a page with all Heating Services
+            </summary>
+        </member>
+        <member name="M:Project.Controllers.HomeController.ElectricityPage">
+            <summary>
+            Shows a page with all Electrical Services
+            </summary>
+        </member>
+        <member name="M:Project.Controllers.HomeController.RegistrationPage(Project.Models.RegistrationModel)">
+            <summary>
+            Handles registraion of a new user
+            </summary>
+            <param name="newUser">User information</param>
+            <returns></returns>
+        </member>
+        <member name="T:Project.Models.ApplicationDbContext">
+            <summary>  
+             This provides a representation of database tables in App.
+            </summary>  
+        </member>
+        <member name="M:Project.Models.ApplicationDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Project.Models.ApplicationDbContext})">
+            <summary>
+            Basic constructor for class
+            </summary>
+            <param name="options"></param>
+        </member>
+        <member name="P:Project.Models.ApplicationDbContext.Services">
+            <summary>
+            Representation Of Services table
+            </summary>
+        </member>
+        <member name="P:Project.Models.ApplicationDbContext.ServiceTypes">
+            <summary>
+            Representation Of ServiceTypes table
+            </summary>
+        </member>
+        <member name="P:Project.Models.ApplicationDbContext.RequestedServices">
+            <summary>
+            Representation Of RequestedServices table
+            </summary>
+        </member>
+        <member name="P:Project.Models.ApplicationDbContext.Reviews">
+            <summary>
+            Representation Of Reviews table
+            </summary>
+        </member>
+        <member name="P:Project.Models.ApplicationDbContext.Payments">
+            <summary>
+            Representation Of Payments table
+            </summary>
+        </member>
+        <member name="T:Project.Models.Payment">
+            <summary>  
+             This class performs an important function.  
+            </summary>  
+        </member>
+    </members>
+</doc>

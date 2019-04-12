@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace Project.Models
 {
+    /// <summary>
+    /// Class that populates tables of the database with initial values.
+    /// </summary>
     public static class SeedData
     {
         public static void EnsurePopulated(IApplicationBuilder app)

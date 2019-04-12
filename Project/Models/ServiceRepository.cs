@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace Project.Models
 {
+    /// <summary>
+    /// Class taht specifies interactions with database
+    /// </summary>
     public class ServiceRepository : IServiceRepository
     {
         private ApplicationDbContext context;
@@ -14,12 +17,35 @@ namespace Project.Models
             context = ctx;
         }
 
+        ///<value>
+        /// Gets list of Aervices
+        ///</value>
         public IQueryable<Service> Services => context.Services;
+
+        ///<value>
+        /// Gets list of ServiceType
+        ///</value>
         public IQueryable<ServiceType> ServiceTypes => context.ServiceTypes;
+
+        ///<value>
+        /// Gets list of Requested Aervices
+        ///</value>
         public IQueryable<RequestedService> RequestedServices => context.RequestedServices;
+
+        ///<value>
+        /// Gets list of Reviews
+        ///</value>
         public IQueryable<Review> Reviews => context.Reviews;
+
+        ///<value>
+        /// Gets list of Payments
+        ///</value>
         public IQueryable<Payment> Payments => context.Payments;
 
+        /// <summary>
+        /// Adds Service 
+        /// </summary>
+        /// <param name="service">Service</param>
         public void AddService(Service service)
         {
             if (service.ServiceId == 0)
@@ -41,6 +67,11 @@ namespace Project.Models
             }
             context.SaveChanges();
         }
+
+        /// <summary>
+        /// Removes service
+        /// </summary>
+        /// <param name="id">ServiceID</param>
         public void RemoveService(int id)
         {
             if (context.Services.Where(p => p.ServiceId == id).FirstOrDefault() != null)
@@ -49,6 +80,11 @@ namespace Project.Models
             }
             context.SaveChanges();
         }
+
+        /// <summary>
+        /// Adds ServiceType
+        /// </summary>
+        /// <param name="serviceType">ServiceType</param>
         public void AddServiceType(ServiceType serviceType)
         {
             if (serviceType.ServiceTypeId == 0)
@@ -68,6 +104,11 @@ namespace Project.Models
             }
             context.SaveChanges();
         }
+
+        /// <summary>
+        /// Removes ServiceType 
+        /// </summary>
+        /// <param name="id">ServiceType ID</param>
         public void RemoveServiceType(int id)
         {
             if (context.ServiceTypes.Where(p => p.ServiceTypeId == id).FirstOrDefault() != null)
@@ -76,6 +117,11 @@ namespace Project.Models
             }
             context.SaveChanges();
         }
+
+        /// <summary>
+        /// Adds Reqeusted Service
+        /// </summary>
+        /// <param name="requestedService">Requested Service</param>
         public void AddRequestedService(RequestedService requestedService)
         {
             if (requestedService.RequestedServiceId == 0)
@@ -106,6 +152,10 @@ namespace Project.Models
             }
             context.SaveChanges();
         }
+        /// <summary>
+        /// Removes Requested Service
+        /// </summary>
+        /// <param name="id">Requested Service ID</param>
         public void RemoveRequestedService(int id)
         {
             if (context.RequestedServices.Where(p => p.RequestedServiceId == id).FirstOrDefault() != null)
@@ -114,6 +164,11 @@ namespace Project.Models
             }
             context.SaveChanges();
         }
+
+        /// <summary>
+        /// Adds a Review
+        /// </summary>
+        /// <param name="review">Review</param>
         public void AddReview(Review review)
         {
             if (review.ReviewId == 0)
@@ -138,6 +193,10 @@ namespace Project.Models
             context.SaveChanges();
         }
 
+        /// <summary>
+        /// Adds Payment
+        /// </summary>
+        /// <param name="payment">Payment</param>
         public void AddPayment(Payment payment)
         {
             if (payment.PaymentId == 0)

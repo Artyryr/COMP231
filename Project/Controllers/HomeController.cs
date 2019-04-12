@@ -11,17 +11,27 @@ using Project.Models;
 
 namespace Project.Controllers
 {
+    /// <summary>
+    /// Controller class that handles transactions between pages
+    /// </summary>
     public class HomeController : Controller
     {
         private IServiceRepository repository;
         private UserManager<GeneralUser> userManager;
         private SignInManager<GeneralUser> signInManager;
 
+        /// <summary>
+        /// Method for getting information about logged in user
+        /// </summary>
+        /// <returns>
+        /// Instance of current user
+        /// </returns>
         public async Task<GeneralUser> GetCurrentUserAsync()
         {
             GeneralUser user = await userManager.FindByNameAsync(User.Identity.Name);
             return user;
         }
+        
         public HomeController(IServiceRepository repo, UserManager<GeneralUser> userMgr,
                 SignInManager<GeneralUser> signInMgr)
         {
@@ -30,9 +40,15 @@ namespace Project.Controllers
             signInManager = signInMgr;
         }
 
+        /// <summary>
+        /// Method that shows index page.
+        /// </summary>
         [HttpGet]
         public ViewResult Index() => View();
 
+        /// <summary>
+        /// Method that shows Login Page
+        /// </summary>
         public ViewResult LoginPage(string returnUrl)
         {
             return View(new LoginModel
@@ -41,11 +57,14 @@ namespace Project.Controllers
             });
         }
 
+        /// <summary>
+        /// Method that used for login functionaluty
+        /// </summary>
+        /// <param name="userSearch">Login information of user</param>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> LoginPage(LoginModel userSearch)
         {
-
 
             //if (userSearch.loggedInThroughFacebook == true)
             //{
@@ -86,17 +105,28 @@ namespace Project.Controllers
             ModelState.AddModelError("", "Invalid name or password");
             return View(userSearch);
         }
+
+        /// <summary>
+        /// Method that handles logout feature
+        /// </summary>
         public async Task<RedirectResult> Logout(string returnUrl = "/")
         {
             await signInManager.SignOutAsync();
             return Redirect(returnUrl);
         }
 
+        /// <summary>
+        /// Shows Registration Page
+        /// </summary>
         public ViewResult RegistrationPage()
         {
             return View();
         }
 
+        /// <summary>
+        /// Shows Page for booking a specific service
+        /// </summary>
+        /// <param name="id">Id of a service</param>
         [HttpGet]
         public async Task<IActionResult> ServiceBookingPage(int id)
         {
@@ -113,6 +143,10 @@ namespace Project.Controllers
             return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id } });
         }
 
+        /// <summary>
+        /// Get the request for booking of a specific service
+        /// </summary>
+        /// <param name="model">Service model</param>
         [HttpPost]
         public async Task<ActionResult> ServiceBookingPage(ServiceRequestModel model)
         {
@@ -170,6 +204,9 @@ namespace Project.Controllers
             }
         }
 
+        /// <summary>
+        /// Shows the page of booking confirmation
+        /// </summary>
         [HttpGet]
         public ActionResult BookingConfirmationPage(BookingConfirmationModel model)
         {
@@ -190,6 +227,10 @@ namespace Project.Controllers
             return View(serviceRequest);
         }
 
+        /// <summary>
+        /// Shows a page of a specific service
+        /// </summary>
+        /// <param name="id">Id of a specific service</param>
         [HttpGet]
         public ActionResult ServicePage(int id)
         {
@@ -203,6 +244,10 @@ namespace Project.Controllers
             return View(service);
         }
 
+        /// <summary>
+        /// Handles addition of a review for a specific service
+        /// </summary>
+        /// <param name="review">Review</param>
         [HttpPost]
         public async Task<ActionResult> ServicePage(Review review)
         {
@@ -224,6 +269,9 @@ namespace Project.Controllers
             return View(service);
         }
 
+        /// <summary>
+        /// Show a page of a personal profile
+        /// </summary>
         [HttpGet]
         [Authorize]
         public async Task<ActionResult> ProfilePage()
@@ -248,6 +296,9 @@ namespace Project.Controllers
             return View(model);
         }
 
+        /// <summary>
+        /// Shows a form for profile update
+        /// </summary>
         [HttpGet]
         [Authorize]
         public async Task<ActionResult> UpdateProfile()
@@ -256,6 +307,11 @@ namespace Project.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// Handles update of user profile
+        /// </summary>
+        /// <param name="user">User information</param>
+        /// <returns></returns>
         [HttpPost]
         [Authorize]
         public async Task<ActionResult> UpdateProfile(GeneralUser user)
@@ -286,6 +342,9 @@ namespace Project.Controllers
             return View(user);
         }
 
+        /// <summary>
+        /// Shows a page with search results
+        /// </summary>
         [HttpPost]
         public ActionResult SearchResult(SearchModel search)
         {
@@ -301,15 +360,29 @@ namespace Project.Controllers
             }
         }
 
+        /// <summary>
+        /// SHows a page with all plumbing services
+        /// </summary>
         [HttpGet]
         public ViewResult PlumbingPage() => View(new ServicesViewModel { Services = repository.Services, ServiceTypes = repository.ServiceTypes });
 
+        /// <summary>
+        /// Shows a page with all Heating Services
+        /// </summary>
         [HttpGet]
         public ViewResult HeatingPage() => View(new ServicesViewModel { Services = repository.Services, ServiceTypes = repository.ServiceTypes });
 
+        /// <summary>
+        /// Shows a page with all Electrical Services
+        /// </summary>
         [HttpGet]
         public ViewResult ElectricityPage() => View(new ServicesViewModel { Services = repository.Services, ServiceTypes = repository.ServiceTypes });
 
+        /// <summary>
+        /// Handles registraion of a new user
+        /// </summary>
+        /// <param name="newUser">User information</param>
+        /// <returns></returns>
         [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> RegistrationPage(RegistrationModel newUser)
