@@ -13,6 +13,9 @@ namespace Project.Models
     /// </summary>
     public class IdentityDbContext : IdentityDbContext<GeneralUser>
     {
+        /// <summary>
+        /// Constructor for a IdentityDbContext class
+        /// </summary>
         public IdentityDbContext(DbContextOptions<IdentityDbContext> options)
             : base(options) { }
     }

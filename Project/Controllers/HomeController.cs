@@ -32,6 +32,12 @@ namespace Project.Controllers
             return user;
         }
         
+        /// <summary>
+        /// Constructor that initialize values for a class
+        /// </summary>
+        /// <param name="repo"></param>
+        /// <param name="userMgr"></param>
+        /// <param name="signInMgr"></param>
         public HomeController(IServiceRepository repo, UserManager<GeneralUser> userMgr,
                 SignInManager<GeneralUser> signInMgr)
         {

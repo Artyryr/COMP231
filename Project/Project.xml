@@ -17,6 +17,14 @@
             Instance of current user
             </returns>
         </member>
+        <member name="M:Project.Controllers.HomeController.#ctor(Project.Models.IServiceRepository,Microsoft.AspNetCore.Identity.UserManager{Project.Models.GeneralUser},Microsoft.AspNetCore.Identity.SignInManager{Project.Models.GeneralUser})">
+            <summary>
+            Constructor that initialize values for a class
+            </summary>
+            <param name="repo"></param>
+            <param name="userMgr"></param>
+            <param name="signInMgr"></param>
+        </member>
         <member name="M:Project.Controllers.HomeController.Index">
             <summary>
             Method that shows index page.
@@ -116,6 +124,26 @@
             <param name="newUser">User information</param>
             <returns></returns>
         </member>
+        <member name="T:Project.Infrastructure.ServicesViewModel">
+            <summary>
+            Instance for storing database information in tables
+            </summary>
+        </member>
+        <member name="P:Project.Infrastructure.ServicesViewModel.Services">
+            <value>
+            List of Services
+            </value>
+        </member>
+        <member name="P:Project.Infrastructure.ServicesViewModel.ServiceTypes">
+            <value>
+            List of Service Types
+            </value>
+        </member>
+        <member name="P:Project.Infrastructure.ServicesViewModel.RequestedServices">
+            <value>
+            List of Requested Services
+            </value>
+        </member>
         <member name="T:Project.Models.ApplicationDbContext">
             <summary>  
              This provides a representation of database tables in App.
@@ -152,10 +180,796 @@
             Representation Of Payments table
             </summary>
         </member>
+        <member name="T:Project.Models.BookingConfirmationModel">
+            <summary>
+            Represents data needed for booking confirmation
+            </summary>
+        </member>
+        <member name="P:Project.Models.BookingConfirmationModel.Discount">
+            <value>
+            Value of discount
+            </value>
+        </member>
+        <member name="P:Project.Models.BookingConfirmationModel.ServiceId">
+            <value>
+            Value of ServiceId
+            </value>
+        </member>
+        <member name="P:Project.Models.BookingConfirmationModel.RequestedServiceId">
+            <value>
+            Value of Requested SErvice Id
+            </value>
+        </member>
+        <member name="P:Project.Models.BookingConfirmationModel.PaymentId">
+            <value>
+            Value of Payment Id
+            </value>
+        </member>
+        <member name="T:Project.Models.GeneralUser">
+            <summary>
+            Represents registered user
+            </summary>
+        </member>
+        <member name="P:Project.Models.GeneralUser.FirstName">
+            <value>
+            First Name of the user
+            </value>
+        </member>
+        <member name="P:Project.Models.GeneralUser.LastName">
+            <value>
+            Last Name of the user
+            </value>
+        </member>
+        <member name="P:Project.Models.GeneralUser.Telephone">
+            <value>
+            Telephone of the user
+            </value>
+        </member>
+        <member name="P:Project.Models.GeneralUser.Apartment">
+            <value>
+            Apartment of the user
+            </value>
+        </member>
+        <member name="P:Project.Models.GeneralUser.Street">
+            <value>
+            Street of the user
+            </value>
+        </member>
+        <member name="P:Project.Models.GeneralUser.City">
+            <value>
+            City of the user
+            </value>
+        </member>
+        <member name="P:Project.Models.GeneralUser.ZIP">
+            <value>
+            ZIP of the user
+            </value>
+        </member>
+        <member name="P:Project.Models.GeneralUser.Province">
+            <value>
+            Province of the user
+            </value>
+        </member>
+        <member name="P:Project.Models.GeneralUser.Discount">
+            <value>
+            Discount of the user
+            </value>
+        </member>
+        <member name="T:Project.Models.IdentityDbContext">
+            <summary>
+            Access to Users Database
+            </summary>
+        </member>
+        <member name="M:Project.Models.IdentityDbContext.#ctor(Microsoft.EntityFrameworkCore.DbContextOptions{Project.Models.IdentityDbContext})">
+            <summary>
+            Constructor for a IdentityDbContext class
+            </summary>
+        </member>
+        <member name="T:Project.Models.IdentitySeedData">
+            <summary>
+            Fulfill the database with initial values
+            </summary>
+        </member>
+        <member name="M:Project.Models.IdentitySeedData.EnsurePopulated(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Populates User Tables with data
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="T:Project.Models.IServiceRepository">
+            <summary>
+            Interface for handeling interactions with database
+            </summary>
+        </member>
+        <member name="P:Project.Models.IServiceRepository.Services">
+            <value>
+             Gets list of services
+            </value>
+        </member>
+        <member name="P:Project.Models.IServiceRepository.ServiceTypes">
+            <value>
+             Gets list of service types
+            </value>
+        </member>
+        <member name="P:Project.Models.IServiceRepository.RequestedServices">
+            <value>
+             Gets list of requested services
+            </value>
+        </member>
+        <member name="P:Project.Models.IServiceRepository.Reviews">
+            <value>
+             Gets list of reviews
+            </value>
+        </member>
+        <member name="P:Project.Models.IServiceRepository.Payments">
+            <value>
+             Gets list of payments
+            </value>
+        </member>
+        <member name="M:Project.Models.IServiceRepository.AddService(Project.Models.Service)">
+            <summary>
+            
+            </summary>
+            <param name="service"></param>
+        </member>
+        <member name="M:Project.Models.IServiceRepository.RemoveService(System.Int32)">
+            <summary>
+            Removes service
+            </summary>
+            <param name="id">ServiceID</param>
+        </member>
+        <member name="M:Project.Models.IServiceRepository.AddServiceType(Project.Models.ServiceType)">
+            <summary>
+            Adds ServiceType
+            </summary>
+            <param name="serviceType">ServiceType</param>
+        </member>
+        <member name="M:Project.Models.IServiceRepository.RemoveServiceType(System.Int32)">
+            <summary>
+            Removes ServiceType 
+            </summary>
+            <param name="id">ServiceType ID</param>
+        </member>
+        <member name="M:Project.Models.IServiceRepository.AddRequestedService(Project.Models.RequestedService)">
+            <summary>
+            Adds Reqeusted Service
+            </summary>
+            <param name="requestedService">Requested Service</param>
+        </member>
+        <member name="M:Project.Models.IServiceRepository.RemoveRequestedService(System.Int32)">
+            <summary>
+            Removes Requested Service
+            </summary>
+            <param name="id">Requested Service ID</param>
+        </member>
+        <member name="M:Project.Models.IServiceRepository.AddReview(Project.Models.Review)">
+            <summary>
+            Adds a Review
+            </summary>
+            <param name="review">Review</param>
+        </member>
+        <member name="M:Project.Models.IServiceRepository.AddPayment(Project.Models.Payment)">
+            <summary>
+            Adds Payment
+            </summary>
+            <param name="payment">Payment</param>
+        </member>
+        <member name="T:Project.Models.LoginModel">
+            <summary>
+            Represents information needed for login function
+            </summary>
+        </member>
+        <member name="P:Project.Models.LoginModel.Email">
+            <value>
+            User Email
+            </value>
+        </member>
+        <member name="P:Project.Models.LoginModel.Password">
+            <value>
+            User Password
+            </value>
+        </member>
+        <member name="P:Project.Models.LoginModel.ReturnUrl">
+            <value>
+            Returning value
+            </value>
+        </member>
+        <member name="P:Project.Models.LoginModel.ConfirmationPassword">
+            <value>
+            Confirmed password
+            </value>
+        </member>
+        <member name="P:Project.Models.LoginModel.loggedInThroughGoogle">
+            <value>
+            If logged through google API
+            </value>
+        </member>
+        <member name="P:Project.Models.LoginModel.loggedInThroughFacebook">
+            <value>
+            IF logged through Facebook API
+            </value>
+        </member>
         <member name="T:Project.Models.Payment">
             <summary>  
-             This class performs an important function.  
+             Represents Payment Class.  
             </summary>  
+        </member>
+        <member name="P:Project.Models.Payment.PaymentId">
+            <value>
+             Id of Payment
+            </value>
+        </member>
+        <member name="P:Project.Models.Payment.UserId">
+            <value>
+             Id of user that is making payment
+            </value>
+        </member>
+        <member name="P:Project.Models.Payment.CardNumber">
+            <value>
+             Cardnumber
+            </value>
+        </member>
+        <member name="P:Project.Models.Payment.BillingAddress">
+            <value>
+             BIlling address of a credit card
+            </value>
+        </member>
+        <member name="P:Project.Models.Payment.ExpiryDate">
+            <value>
+             Expiry date of a credit card
+            </value>
+        </member>
+        <member name="P:Project.Models.Payment.CVV">
+            <value>
+             CVV date of a credit card
+            </value>
+        </member>
+        <member name="P:Project.Models.Payment.NameOnCard">
+            <value>
+             Name on the credit card
+            </value>
+        </member>
+        <member name="P:Project.Models.Payment.PostalCode">
+            <value>
+             Postal code of Billing Address
+            </value>
+        </member>
+        <member name="T:Project.Models.ProfileModel">
+            <summary>
+            Model of a profile page
+            </summary>
+        </member>
+        <member name="P:Project.Models.ProfileModel.User">
+            <value>
+             CUrrent user and all information
+            </value>
+        </member>
+        <member name="P:Project.Models.ProfileModel.RequestedServices">
+            <value>
+             All requested services made by this user
+            </value>
+        </member>
+        <member name="P:Project.Models.ProfileModel.UserPayment">
+            <value>
+             stored payment method for a user
+            </value>
+        </member>
+        <member name="T:Project.Models.RegistrationModel">
+            <summary>
+            Model for the registration page
+            </summary>
+        </member>
+        <member name="P:Project.Models.RegistrationModel.Email">
+            <value>
+             Email of a new user
+            </value>
+        </member>
+        <member name="P:Project.Models.RegistrationModel.Password">
+            <value>
+             Password of a new user
+            </value>
+        </member>
+        <member name="P:Project.Models.RegistrationModel.ReturnUrl">
+            <value>
+             URL for the next operation
+            </value>
+        </member>
+        <member name="P:Project.Models.RegistrationModel.ConfirmationPassword">
+            <value>
+             Confirmed password
+            </value>
+        </member>
+        <member name="P:Project.Models.RegistrationModel.User">
+            <summary>
+            Representation of user model
+            </summary>
+        </member>
+        <member name="T:Project.Models.RequestedService">
+            <summary>
+            Model of requested service
+            </summary>
+        </member>
+        <member name="P:Project.Models.RequestedService.RequestedServiceId">
+            <value>
+             Id of a Requested Service
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.ServiceId">
+            <value>
+             Id of a Service that was requested
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.UserId">
+            <value>
+             Id of a User that requested service 
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.FirstName">
+            <value>
+             First Name of a User that requested service 
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.LastName">
+            <value>
+             Last name of a User that requested service 
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.Telephone">
+            <value>
+             Telephone of a User that requested service 
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.Email">
+            <value>
+             Email of a User that requested service 
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.Date">
+            <value>
+             Date for a requested service 
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.Apartment">
+            <value>
+             Apartment for a requested service 
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.Street">
+            <value>
+             Street for a requested service 
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.City">
+            <value>
+             City for a requested service 
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.ZIP">
+            <value>
+             ZIP for a requested service 
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.Province">
+            <value>
+             Province for a requested service 
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.NumberOfHours">
+            <value>
+             Number of hours for a requested service 
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.TotalPrice">
+            <value>
+             Total frice of a requested service 
+            </value>
+        </member>
+        <member name="P:Project.Models.RequestedService.Payment">
+            <value>
+             Payment for a requested service 
+            </value>
+        </member>
+        <member name="M:Project.Models.RequestedService.#ctor">
+            <summary>
+            Basic constructor
+            </summary>
+        </member>
+        <member name="M:Project.Models.RequestedService.#ctor(System.Int32,System.String,System.String,System.String,System.String,System.DateTime,System.String,System.String,System.String,System.String,System.String,System.Double)">
+            <summary>
+            Constructor with parameters
+            </summary>
+            <param name="serviceId"></param>
+            <param name="firstName"></param>
+            <param name="lastName"></param>
+            <param name="telephone"></param>
+            <param name="email"></param>
+            <param name="date"></param>
+            <param name="apartment"></param>
+            <param name="street"></param>
+            <param name="city"></param>
+            <param name="zip"></param>
+            <param name="province"></param>
+            <param name="numberOfHours"></param>
+        </member>
+        <member name="M:Project.Models.RequestedService.AddPayment(Project.Models.Payment)">
+            <summary>
+            Method for addign a payment method
+            </summary>
+            <param name="payment">Payment</param>
+        </member>
+        <member name="T:Project.Models.Review">
+            <summary>
+            Model of a review for a service
+            </summary>
+        </member>
+        <member name="P:Project.Models.Review.ReviewId">
+            <value>
+             Id of a Review
+            </value>
+        </member>
+        <member name="P:Project.Models.Review.UserName">
+            <value>
+             Name of the reveiwer
+            </value>
+        </member>
+        <member name="P:Project.Models.Review.Rating">
+            <value>
+             Rating 
+            </value>
+        </member>
+        <member name="P:Project.Models.Review.ReviewText">
+            <value>
+             Text of the reveiw
+            </value>
+        </member>
+        <member name="P:Project.Models.Review.ServiceId">
+            <value>
+             Id of a reviewed service
+            </value>
+        </member>
+        <member name="P:Project.Models.Review.Date">
+            <value>
+             Date of a Review
+            </value>
+        </member>
+        <member name="P:Project.Models.Review.UserId">
+            <value>
+             Id of the user that has written the review
+            </value>
+        </member>
+        <member name="M:Project.Models.Review.AddUser(System.String)">
+            <summary>
+            Method that adds a user to the review object
+            </summary>
+            <param name="userName">User name</param>
+        </member>
+        <member name="T:Project.Models.SearchModel">
+            <summary>
+            Model for the search page
+            </summary>
+        </member>
+        <member name="P:Project.Models.SearchModel.SearchName">
+            <value>
+             Search criteria
+            </value>
+        </member>
+        <member name="P:Project.Models.SearchModel.Services">
+            <value>
+             List of found Services
+            </value>
+        </member>
+        <member name="P:Project.Models.SearchModel.Filter">
+            <value>
+             Applied Filters
+            </value>
+        </member>
+        <member name="T:Project.Models.SeedData">
+            <summary>
+            Class that populates tables of the database with initial values.
+            </summary>
+        </member>
+        <member name="M:Project.Models.SeedData.EnsurePopulated(Microsoft.AspNetCore.Builder.IApplicationBuilder)">
+            <summary>
+            Populates tables of a database with information
+            </summary>
+            <param name="app"></param>
+        </member>
+        <member name="T:Project.Models.Service">
+            <summary>
+            MOdel of a service
+            </summary>
+        </member>
+        <member name="P:Project.Models.Service.ServiceId">
+            <value>
+             Id of a specific service
+            </value>
+        </member>
+        <member name="P:Project.Models.Service.ServiceName">
+            <value>
+             Service Name of a specific service
+            </value>
+        </member>
+        <member name="P:Project.Models.Service.ServiceTypeId">
+            <value>
+             Id of service type
+            </value>
+        </member>
+        <member name="P:Project.Models.Service.PricePerHour">
+            <value>
+             Price Per Hour of a specific service
+            </value>
+        </member>
+        <member name="P:Project.Models.Service.Description">
+            <value>
+             Description of a specific service
+            </value>
+        </member>
+        <member name="P:Project.Models.Service.Reviews">
+            <value>
+             Reviews of a specific service
+            </value>
+        </member>
+        <member name="M:Project.Models.Service.#ctor">
+            <summary>
+            Basic constructor for a service
+            </summary>
+        </member>
+        <member name="M:Project.Models.Service.#ctor(System.String,System.Int32,System.Double)">
+            <summary>
+            service constructor
+            </summary>
+            <param name="serviceName"></param>
+            <param name="serviceTypeId"></param>
+            <param name="pricePerHour"></param>
+        </member>
+        <member name="M:Project.Models.Service.#ctor(System.String,System.Int32,System.Double,System.String)">
+            <summary>
+            Service constructor
+            </summary>
+            <param name="serviceName"></param>
+            <param name="serviceTypeId"></param>
+            <param name="pricePerHour"></param>
+            <param name="description"></param>
+        </member>
+        <member name="M:Project.Models.Service.AddReviews(System.Collections.Generic.List{Project.Models.Review})">
+            <summary>
+            Add list of reviews to a service
+            </summary>
+            <param name="reviews"></param>
+        </member>
+        <member name="M:Project.Models.Service.AddOneReview(Project.Models.Review)">
+            <summary>
+            Add one review to a service
+            </summary>
+            <param name="review"></param>
+        </member>
+        <member name="T:Project.Models.ServiceRepository">
+            <summary>
+            Class taht specifies interactions with database
+            </summary>
+        </member>
+        <member name="M:Project.Models.ServiceRepository.#ctor(Project.Models.ApplicationDbContext)">
+            <summary>
+            Innitializes value of a context
+            </summary>
+            <param name="ctx"></param>
+        </member>
+        <member name="P:Project.Models.ServiceRepository.Services">
+            <value>
+             Gets list of Aervices
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceRepository.ServiceTypes">
+            <value>
+             Gets list of ServiceType
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceRepository.RequestedServices">
+            <value>
+             Gets list of Requested Aervices
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceRepository.Reviews">
+            <value>
+             Gets list of Reviews
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceRepository.Payments">
+            <value>
+             Gets list of Payments
+            </value>
+        </member>
+        <member name="M:Project.Models.ServiceRepository.AddService(Project.Models.Service)">
+            <summary>
+            Adds Service 
+            </summary>
+            <param name="service">Service</param>
+        </member>
+        <member name="M:Project.Models.ServiceRepository.RemoveService(System.Int32)">
+            <summary>
+            Removes service
+            </summary>
+            <param name="id">ServiceID</param>
+        </member>
+        <member name="M:Project.Models.ServiceRepository.AddServiceType(Project.Models.ServiceType)">
+            <summary>
+            Adds ServiceType
+            </summary>
+            <param name="serviceType">ServiceType</param>
+        </member>
+        <member name="M:Project.Models.ServiceRepository.RemoveServiceType(System.Int32)">
+            <summary>
+            Removes ServiceType 
+            </summary>
+            <param name="id">ServiceType ID</param>
+        </member>
+        <member name="M:Project.Models.ServiceRepository.AddRequestedService(Project.Models.RequestedService)">
+            <summary>
+            Adds Reqeusted Service
+            </summary>
+            <param name="requestedService">Requested Service</param>
+        </member>
+        <member name="M:Project.Models.ServiceRepository.RemoveRequestedService(System.Int32)">
+            <summary>
+            Removes Requested Service
+            </summary>
+            <param name="id">Requested Service ID</param>
+        </member>
+        <member name="M:Project.Models.ServiceRepository.AddReview(Project.Models.Review)">
+            <summary>
+            Adds a Review
+            </summary>
+            <param name="review">Review</param>
+        </member>
+        <member name="M:Project.Models.ServiceRepository.AddPayment(Project.Models.Payment)">
+            <summary>
+            Adds Payment
+            </summary>
+            <param name="payment">Payment</param>
+        </member>
+        <member name="T:Project.Models.ServiceRequestModel">
+            <summary>
+            Model for service request handling 
+            </summary>
+        </member>
+        <member name="P:Project.Models.ServiceRequestModel.RequestedService">
+            <value>
+             Reqeusted Service
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceRequestModel.User">
+            <value>
+             User that has made a request
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceRequestModel.ServiceId">
+            <value>
+             Id of a service
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceRequestModel.Payment">
+            <value>
+             Payment information
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceRequestModel.Discount">
+            <value>
+             Discount information
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceRequestModel.Service">
+            <value>
+             Service itself
+            </value>
+        </member>
+        <member name="T:Project.Models.ServiceRequestSummary">
+            <summary>
+            Model for a request summary page
+            </summary>
+        </member>
+        <member name="P:Project.Models.ServiceRequestSummary.ServiceName">
+            <value>
+             Name of the reqeusted service
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceRequestSummary.PricePerHour">
+            <value>
+             Price Per Hour of a specific service
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceRequestSummary.NumberOfHours">
+            <value>
+             Number of hours requested
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceRequestSummary.Date">
+            <value>
+             Requested date
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceRequestSummary.TotalPrice">
+            <value>
+             Total resulterd price
+            </value>
+        </member>
+        <member name="T:Project.Models.ServiceType">
+            <summary>
+            Type of a service
+            </summary>
+        </member>
+        <member name="P:Project.Models.ServiceType.ServiceTypeId">
+            <value>
+             id of a service type
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceType.ServiceTypeName">
+            <value>
+             Name of a service type
+            </value>
+        </member>
+        <member name="P:Project.Models.ServiceType.Description">
+            <value>
+             Service type description
+            </value>
+        </member>
+        <member name="M:Project.Models.ServiceType.#ctor">
+            <summary>
+            Basic constructor for a service Type
+            </summary>
+        </member>
+        <member name="M:Project.Models.ServiceType.#ctor(System.String,System.String)">
+            <summary>
+            Service type constructor 
+            </summary>
+            <param name="serviceTypeName">Name of type</param>
+            <param name="description">Description </param>
+        </member>
+        <member name="T:Project.Program">
+            <summary>
+            Main programm class
+            </summary>
+        </member>
+        <member name="M:Project.Program.Main(System.String[])">
+            <summary>
+            Main method that initizlize the whole app
+            </summary>
+            <param name="args"></param>
+        </member>
+        <member name="M:Project.Program.BuildWebHost(System.String[])">
+            <summary>
+            One of the core methods for the .NetCore Application
+            </summary>
+            <param name="args"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Project.Startup">
+            <summary>
+            Main Startup class
+            </summary>
+        </member>
+        <member name="M:Project.Startup.#ctor(Microsoft.Extensions.Configuration.IConfiguration)">
+            <summary>
+            Configures services and the app's request pipeline.
+            </summary>
+            <param name="configuration"></param>
+        </member>
+        <member name="P:Project.Startup.Configuration">
+            <value>
+            Instance of a configuration
+            </value>
+        </member>
+        <member name="M:Project.Startup.ConfigureServices(Microsoft.Extensions.DependencyInjection.IServiceCollection)">
+            <summary>
+            Configure services used in the app
+            </summary>
+            <param name="services"></param>
+        </member>
+        <member name="M:Project.Startup.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder,Microsoft.AspNetCore.Hosting.IHostingEnvironment)">
+            <summary>
+            This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+            </summary>
+            <param name="app"></param>
+            <param name="env"></param>
         </member>
     </members>
 </doc>

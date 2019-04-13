@@ -12,6 +12,10 @@ namespace Project.Models
     {
         private ApplicationDbContext context;
         
+        /// <summary>
+        /// Innitializes value of a context
+        /// </summary>
+        /// <param name="ctx"></param>
         public ServiceRepository(ApplicationDbContext ctx)
         {
             context = ctx;

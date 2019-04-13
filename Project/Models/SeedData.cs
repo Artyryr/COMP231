@@ -12,6 +12,10 @@ namespace Project.Models
     /// </summary>
     public static class SeedData
     {
+        /// <summary>
+        /// Populates tables of a database with information
+        /// </summary>
+        /// <param name="app"></param>
         public static void EnsurePopulated(IApplicationBuilder app)
         {
             ApplicationDbContext context = app.ApplicationServices

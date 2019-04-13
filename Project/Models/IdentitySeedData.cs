@@ -17,6 +17,11 @@ namespace Project.Models
         private const string user1Password = "Password123!";
         private const string testUser = "Test@gmail.com";
         private const string testPassword = "Password123!";
+
+        /// <summary>
+        /// Populates User Tables with data
+        /// </summary>
+        /// <param name="app"></param>
         public static async void EnsurePopulated(IApplicationBuilder app)
         {
             UserManager<GeneralUser> userManager = app.ApplicationServices

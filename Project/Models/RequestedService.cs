@@ -17,11 +17,11 @@ namespace Project.Models
         ///</value>
         [Key]
         public int RequestedServiceId { get; set; }
-        [ForeignKey("ServiceForeignKey")]
 
         ///<value>
         /// Id of a Service that was requested
         ///</value>
+        [ForeignKey("ServiceForeignKey")]
         public int ServiceId { get; set; }
 
         ///<value>

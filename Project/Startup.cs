@@ -13,12 +13,27 @@ using Project.Models;
 
 namespace Project
 {
+    /// <summary>
+    /// Main Startup class
+    /// </summary>
     public class Startup
     {
+        /// <summary>
+        /// Configures services and the app's request pipeline.
+        /// </summary>
+        /// <param name="configuration"></param>
         public Startup(IConfiguration configuration) =>
            Configuration = configuration;
+
+        /// <value>
+        /// Instance of a configuration
+        /// </value>
         public IConfiguration Configuration { get; }
 
+        /// <summary>
+        /// Configure services used in the app
+        /// </summary>
+        /// <param name="services"></param>
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<IdentityDbContext>(options =>
@@ -43,7 +58,11 @@ namespace Project
             services.AddMvc();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// </summary>
+        /// <param name="app"></param>
+        /// <param name="env"></param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             app.UseDeveloperExceptionPage();
