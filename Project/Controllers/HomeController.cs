@@ -23,6 +23,7 @@ namespace Project.Controllers
         /// <summary>
         /// Method for getting information about logged in user
         /// </summary>
+
         /// <returns>
         /// Instance of current user
         /// </returns>
@@ -31,7 +32,7 @@ namespace Project.Controllers
             GeneralUser user = await userManager.FindByNameAsync(User.Identity.Name);
             return user;
         }
-        
+
         /// <summary>
         /// Constructor that initialize values for a class
         /// </summary>
@@ -50,7 +51,15 @@ namespace Project.Controllers
         /// Method that shows index page.
         /// </summary>
         [HttpGet]
-        public ViewResult Index() => View();
+        public async Task<ViewResult> Index()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                GeneralUser user = await GetCurrentUserAsync();
+                ViewBag.Discount = user.Discount;
+            }
+            return View();
+        }
 
         /// <summary>
         /// Method that shows Login Page
@@ -71,29 +80,6 @@ namespace Project.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> LoginPage(LoginModel userSearch)
         {
-
-            //if (userSearch.loggedInThroughFacebook == true)
-            //{
-
-            //}
-            //else if (userSearch.loggedInThroughGoogle == true)
-            //{
-            //    GeneralUser user = userSearch.User;
-            //    await signInManager.SignOutAsync();
-            //    //await signInManager.SignInAsync(user, false);
-
-            //    var info = signInManager.GetExternalAuthenticationSchemesAsync();
-            //    var info2 = signInManager.GetExternalAuthenticationSchemesAsync();
-            //    await signInManager.ExternalLoginSignInAsync("Google", "",false);
-
-            //    //    if ((await signInManager.ExternalLoginSignInAsync(
-            //    //"Google", userSearch.User.Id, false)).Succeeded)
-            //    //    {
-            //    return RedirectToAction(userSearch?.ReturnUrl ?? "Index");
-            //    //}
-
-            //}
-            //else
             if (ModelState.IsValid)
             {
                 GeneralUser user =
@@ -140,12 +126,20 @@ namespace Project.Controllers
             {
                 GeneralUser user = await GetCurrentUserAsync();
                 Payment payment = repository.Payments.Where(p => p.UserId == user.Id).LastOrDefault();
+
+                //If user has already made a payment
                 if (payment != null)
                 {
+                    //Returns a page with personal information and payment (if such information is found) of a current user
                     return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id, UserId = user.Id, FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Telephone = user.Telephone, Apartment = user.Apartment, City = user.City, Street = user.Street, Province = user.Province, ZIP = user.ZIP }, Payment = payment });
                 }
-                else { return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id, UserId = user.Id, FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Telephone = user.Telephone, Apartment = user.Apartment, City = user.City, Street = user.Street, Province = user.Province, ZIP = user.ZIP } }); }
+                else
+                {
+                    //Returns a page with personal information of a current user
+                    return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id, UserId = user.Id, FirstName = user.FirstName, LastName = user.LastName, Email = user.Email, Telephone = user.Telephone, Apartment = user.Apartment, City = user.City, Street = user.Street, Province = user.Province, ZIP = user.ZIP } });
+                }
             }
+            //Returns a blank page
             return View(new ServiceRequestModel { RequestedService = new RequestedService { ServiceId = id } });
         }
 
@@ -160,6 +154,7 @@ namespace Project.Controllers
             {
                 try
                 {
+                    //Logic for Authentificated User
                     if (User.Identity.IsAuthenticated)
                     {
                         GeneralUser user = await GetCurrentUserAsync();
@@ -170,6 +165,8 @@ namespace Project.Controllers
 
                         requestedService.AddPayment(payment);
                         requestedService.UserId = user.Id;
+
+                        //Calculates the resulted price after discount for registered user
                         requestedService.TotalPrice = requestedService.NumberOfHours * service.PricePerHour - (requestedService.NumberOfHours * service.PricePerHour * user.Discount / 100);
 
                         repository.AddPayment(payment);
@@ -182,6 +179,7 @@ namespace Project.Controllers
 
                         return RedirectToAction("BookingConfirmationPage", new BookingConfirmationModel { Discount = model.Discount, ServiceId = model.Service.ServiceId, RequestedServiceId = model.RequestedService.RequestedServiceId, PaymentId = model.Payment.PaymentId });
                     }
+                    //Logic for unregistered user
                     else
                     {
                         Service service = repository.Services.Where(p => p.ServiceId == model.RequestedService.ServiceId).FirstOrDefault();
@@ -189,6 +187,8 @@ namespace Project.Controllers
                         Payment payment = model.Payment;
 
                         requestedService.AddPayment(payment);
+
+                        //Calculates resulted price of a requested service
                         requestedService.TotalPrice = requestedService.NumberOfHours * service.PricePerHour;
 
                         repository.AddRequestedService(requestedService);
@@ -221,15 +221,17 @@ namespace Project.Controllers
             Payment payment = repository.Payments.Where(p => p.PaymentId == model.PaymentId).LastOrDefault();
             ServiceRequestModel serviceRequest = new ServiceRequestModel();
 
+            //Logic for authorized user
             if (User.Identity.IsAuthenticated)
             {
+
                 serviceRequest = new ServiceRequestModel { Service = service, RequestedService = requested, Payment = payment, Discount = model.Discount };
             }
+            //Logic for a unregistered user
             else
             {
                 serviceRequest = new ServiceRequestModel { Service = service, RequestedService = requested, Payment = payment };
             }
-
             return View(serviceRequest);
         }
 
@@ -287,9 +289,13 @@ namespace Project.Controllers
                                                         where service.UserId == user.Id
                                                         orderby service.Date ascending
                                                         select service).ToList();
+
             List<ServiceRequestSummary> services = new List<ServiceRequestSummary>();
             Payment payment = repository.Payments.Where(p => p.UserId == user.Id).LastOrDefault();
 
+            //Loop that is used for combining information from 2 different lists that are
+            //list of requested service and list of payments into 
+            //one list of ServiceRequestSummary
             foreach (var item in requestedServices)
             {
                 Service ser = (Service)(from service in repository.Services
